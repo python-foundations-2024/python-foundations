@@ -7886,16 +7886,6 @@ This happens because the local folder has priority over Python's built-in librar
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="The-__name__-Variable">The <code>__name__</code> Variable<a class="anchor-link" href="#The-__name__-Variable">¶</a></h2><p>Every module has a special built-in variable called <code>__name__</code>. When a module is run directly, <code>__name__</code> is set to <code>"__main__"</code>. However, when a module is imported into another script, <code>__name__</code> is set to the module's filename. This allows you to control parts of the module’s code execution.</p>
 <div class="highlight"><pre><span></span><span class="c1"># math_operations.py</span>
 
@@ -8021,8 +8011,7 @@ When you have a collection of modules organized into a folder, it is called a pa
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pandas</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
@@ -8038,12 +8027,81 @@ When you have a collection of modules organized into a folder, it is called a pa
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="How-to-generate-a-list-of-all-installed-Python-packages?">How to generate a list of all installed Python packages?<a class="anchor-link" href="#How-to-generate-a-list-of-all-installed-Python-packages?">¶</a></h2><p>You can use either the command <code>pip list</code> or <code>pip freeze</code>.
+The difference between both lies in their output format and intended use.</p>
+<ul>
+<li><code>pip list</code> output is in a human-readable format</li>
+<li><code>pip freeze</code> output is suitable for generating requirements file.</li>
+</ul>
+<p>Open your terminal or command prompt and type</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>freeze
+</pre></div>
+<p>If you do it on Colab or in Jupyter Notebook, you can run it in a code cell using the ! character in the beginning to indicate that it´s a command.</p>
+<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">freeze</span>
+</pre></div>
+<p>In both cases you´ll get a list of packages that are installed and the versions of each of them.</p>
+<p>This list is important because:</p>
+<ul>
+<li>It helps you see what packages are installed, which is crucial for managing dependencies in a project</li>
+<li>It ensures that you can keep track of package versions, which helps maintain compatibility and avoid issues when sharing code or deploying applications</li>
+</ul>
+<blockquote>
+<p>If you copy the list to a text file called <code>requirements.txt</code> it will allow you to easily recreate the environment on another system or share it with others</p>
+</blockquote>
+<p>For production pipelines dependency management and packaging tool like Poetry is highly recommended because it simplifies the project.</p>
+<p>More information about <a href="https://python-poetry.org/docs/">Poetry</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="How-to-install-a-python-package-from-PyPI?">How to install a python package from PyPI?<a class="anchor-link" href="#How-to-install-a-python-package-from-PyPI?">¶</a></h2><p>To install a Python package from PyPI (Python Package Index), you can use the pip command in your terminal or command prompt.</p>
+<ol>
+<li>Install the Latest Version</li>
+</ol>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>package_name
+</pre></div>
+<p>The <code>-U</code> flag in pip install stands for "upgrade." When you use this flag, it instructs pip to upgrade the specified package to the latest version available on PyPI, even if a version is already installed.</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>package_name
+</pre></div>
+<ol start="2">
+<li>Install a Specific Version</li>
+</ol>
+<p>To install a specific version of a package, specify the version number:</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">package_name</span><span class="o">==</span>version_number
+</pre></div>
+<ol start="3">
+<li>Install At Least a Given Version</li>
+</ol>
+<p>To install a package that is at least a certain version, use the greater-than-or-equal-to operator (&gt;=):</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>package_name&gt;<span class="o">=</span>version_number
+</pre></div>
+<ol start="4">
+<li>Install a Stable Version</li>
+</ol>
+<p>To avoid unexpected behavior caused by newer versions of a package, this ensure that you use a stable, tested version.</p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>package_name&lt;<span class="o">=</span>version_number
+</pre></div>
 </div>
 </div>
 </div>
