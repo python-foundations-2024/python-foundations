@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>05 - Dataframes</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>05 - Dataframes and Exploratory Data Analysis</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7516,7 +7516,18 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Key-Statistical-Concepts">Key Statistical Concepts<a class="anchor-link" href="#Key-Statistical-Concepts">¶</a></h1><h3 id="Mean">Mean<a class="anchor-link" href="#Mean">¶</a></h3><p>The mean is the average of a dataset and is calculated by summing all the values and dividing by the total number of observations. It provides a central value of the data.</p>
+<h1 id="Key-Statistical-Concepts">Key Statistical Concepts<a class="anchor-link" href="#Key-Statistical-Concepts">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Mean">Mean<a class="anchor-link" href="#Mean">¶</a></h3><p>The mean is the average of a dataset and is calculated by summing all the values and dividing by the total number of observations. It provides a central value of the data.</p>
 <ul>
 <li>Example:</li>
 </ul>
@@ -7525,6 +7536,36 @@ a.anchor-link {
 <span class="n">mean_sales</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sales</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">sales</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mean Sales:</span><span class="si">{</span><span class="n">mean_sales</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Output: Mean Sales: 20.0</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># We can use numpy to calculate it</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Sales data</span>
+<span class="n">sales</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mean:</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sales</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Median">Median<a class="anchor-link" href="#Median">¶</a></h3><p>The median is the middle value of a dataset when sorted in ascending order. It is useful in datasets that may contain outliers.</p>
 <ul>
 <li>Example:</li>
@@ -7536,6 +7577,33 @@ a.anchor-link {
 <span class="n">median_age</span> <span class="o">=</span> <span class="n">sorted_ages</span><span class="p">[</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">(</span><span class="n">sorted_ages</span><span class="p">[</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">sorted_ages</span><span class="p">[</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Median Age: </span><span class="si">{</span><span class="n">median_age</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Output: Median Age: 29</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1">#using NumPy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Median Age:</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">ages</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">):</span> <span class="c1"># Output: Median Age: 29</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Mode">Mode<a class="anchor-link" href="#Mode">¶</a></h3><p>The mode is the value that appears most frequently in a dataset. It is particularly useful for categorical data.</p>
 <p>Example:
 In a survey about favorite fruits, the responses are:
@@ -7547,6 +7615,37 @@ The mode, or the most frequent value is "Banana"</p>
 <span class="n">mode_fruit</span> <span class="o">=</span> <span class="n">mode</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mode of Fruits:</span><span class="si">{</span><span class="n">mode_fruit</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Output: Mode of Fruits: Banana</span>
 </pre></div>
+<blockquote>
+<p>For numerical data, NumPy also provides a more direct way to calculate the mode using <code>scipy.stats.mode()</code></p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">mode</span>
+
+<span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Apple"</span><span class="p">,</span> <span class="s2">"Banana"</span><span class="p">,</span> <span class="s2">"Apple"</span><span class="p">,</span> <span class="s2">"Orange"</span><span class="p">,</span> <span class="s2">"Banana"</span><span class="p">,</span> <span class="s2">"Banana"</span><span class="p">]</span>
+<span class="n">mode_fruit</span> <span class="o">=</span> <span class="n">mode</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mode of Fruits:</span><span class="si">{</span><span class="n">mode_fruit</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Output: Mode of Fruits: Banana</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Variance">Variance<a class="anchor-link" href="#Variance">¶</a></h3><p>Variance measures how far each number in the dataset is from the mean and indicates the degree of spread in the data.</p>
 <ul>
 <li>Example:</li>
@@ -7571,6 +7670,55 @@ $\frac{80 + 85 + 90 + 95 + 100}{5}$ = $\frac{450}{5}$ = 90</p>
 <span class="n">variance</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean_score</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Variance of Scores: </span><span class="si">{</span><span class="n">variance</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Output: Variance of Scores: 62.5</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Using NumPy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># List of scores</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+
+<span class="c1"># Calculate mean using NumPy</span>
+<span class="n">mean_score_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+
+<span class="c1"># Calculate variance using NumPy (ddof=1 for sample variance)</span>
+<span class="n">variance_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Variance of Scores (NumPy): </span><span class="si">{</span><span class="n">variance_np</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Output: Variance of Scores (NumPy): 62.5</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>The degrees of freedom (ddof) parameter is key to understanding how variance is calculated. When you're calculating variance, you have two options: <strong>population variance</strong> (ddof=0) or <strong>sample variance</strong> (ddof = 1). When you're working with a sample, you typically use ddof=1 to ensure an unbiased estimate of the population variance. When you have data for the entire population, you can use ddof=0.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Standard-Deviation">Standard Deviation<a class="anchor-link" href="#Standard-Deviation">¶</a></h3><p>The standard deviation is the square root of the variance and provides a measure of the average distance of each data point from the mean.</p>
 <ul>
 <li>Example:</li>
@@ -7582,6 +7730,39 @@ $\frac{80 + 85 + 90 + 95 + 100}{5}$ = $\frac{450}{5}$ = 90</p>
 <span class="n">std_dev</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Standard Deviation of Scores: </span><span class="si">{</span><span class="n">std_dev</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Output: Standard Deviation of Scores: 7.905694150420948</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Using NumPy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># List of scores</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+
+<span class="c1"># Sample standard deviation (ddof=1)</span>
+<span class="n">sample_std_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Sample standard deviation</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sample Standard Deviation: </span><span class="si">{</span><span class="n">sample_std_dev</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Quantiles">Quantiles<a class="anchor-link" href="#Quantiles">¶</a></h3><p>Quantiles divide a dataset into equal-sized subsets. For instance, quartiles divide the data into four equal parts.
 Quantiles are useful to identify outliers in the data</p>
 <ul>
@@ -7612,43 +7793,21 @@ Quantiles are useful to identify outliers in the data</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># use this as a playground to experiment with statistical concepts</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Using NumPy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">sales</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
-<span class="n">mean_sales</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sales</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">sales</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mean Sales:</span><span class="si">{</span><span class="n">mean_sales</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span>
-<span class="n">sorted_ages</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ages</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_ages</span><span class="p">)</span>
-<span class="n">median_age</span> <span class="o">=</span> <span class="n">sorted_ages</span><span class="p">[</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">(</span><span class="n">sorted_ages</span><span class="p">[</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">sorted_ages</span><span class="p">[</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Median Age: </span><span class="si">{</span><span class="n">median_age</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">mode</span>
-<span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Apple"</span><span class="p">,</span> <span class="s2">"Banana"</span><span class="p">,</span> <span class="s2">"Apple"</span><span class="p">,</span> <span class="s2">"Orange"</span><span class="p">,</span> <span class="s2">"Banana"</span><span class="p">,</span> <span class="s2">"Banana"</span><span class="p">]</span>
-<span class="n">mode_fruit</span> <span class="o">=</span> <span class="n">mode</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mode of Fruits: </span><span class="si">{</span><span class="n">mode_fruit</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
-<span class="n">mean_score</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
-<span class="n">variance</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean_score</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Variance of Scores: </span><span class="si">{</span><span class="n">variance</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="n">std_dev</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Standard Deviation of Scores: </span><span class="si">{</span><span class="n">std_dev</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
+<span class="c1"># Scores</span>
 <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
-<span class="n">sorted_scores</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
 
-<span class="c1"># Calculate quartiles</span>
-<span class="n">q1</span> <span class="o">=</span> <span class="n">sorted_scores</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_scores</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.25</span><span class="p">)]</span>
-<span class="n">q2</span> <span class="o">=</span> <span class="n">sorted_scores</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_scores</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)]</span>  <span class="c1"># Median</span>
-<span class="n">q3</span> <span class="o">=</span> <span class="n">sorted_scores</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_scores</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.75</span><span class="p">)]</span>
+<span class="c1"># Calculate the quartiles using NumPy's percentile function</span>
+<span class="n">q1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>  <span class="c1"># 1st Quartile (Q1) - 25th percentile</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>  <span class="c1"># 2nd Quartile (Q2 - Median) - 50th percentile</span>
+<span class="n">q3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span>  <span class="c1"># 3rd Quartile (Q3) - 75th percentile</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"1st Quartile (Q1):</span><span class="si">{</span><span class="n">q1</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Median (Q2):</span><span class="si">{</span><span class="n">q2</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"3rd Quartile (Q3):</span><span class="si">{</span><span class="n">q3</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># Print the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"1st Quartile (Q1): </span><span class="si">{</span><span class="n">q1</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Median (Q2): </span><span class="si">{</span><span class="n">q2</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"3rd Quartile (Q3): </span><span class="si">{</span><span class="n">q3</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7740,14 +7899,12 @@ Quantiles are useful to identify outliers in the data</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div style="display: flex; justify-content: space-around;">
-<img alt="Pandas Logo" src="https://pandas.pydata.org/static/img/pandas.svg" style="height: 50px; max-height: 50px;"/>
-<img alt="Dask Logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP5KVvipePSkKXNx0CLGxNfV2hnEdm13gPMA&amp;s" style="height: 50px; max-height: 50px;"/>
-<img alt="Koalas Logo" src="https://koalas.readthedocs.io/en/latest/_static/koalas-logo-docs.png" style="height: 50px; max-height: 50px;"/>
-<img alt="Modin Logo" src="https://modin.readthedocs.io/en/latest/_images/MODIN_ver2_hrz.png" style="height: 50px; max-height: 50px;"/>
-<img alt="Polars Logo" src="https://raw.githubusercontent.com/pola-rs/polars-static/master/logos/polars-logo-dimmed-medium.png" style="height: 50px; max-height: 50px;"/>
-<img alt="Vaex Logo" src="https://vaex.io/docs/_static/logo-grey.svg" style="height: 50px; max-height: 50px;"/>
-</div>
+<img alt="Pandas Logo" height="50" src="https://pandas.pydata.org/static/img/pandas_white.svg"/>
+<img alt="Dask Logo" height="50" src="https://docs.dask.org/en/stable/_static/images/dask-horizontal-white.svg"/>
+<img alt="Koalas Logo" height="50" src="https://koalas.readthedocs.io/en/latest/_static/koalas-logo-docs.png"/>
+<img alt="Modin Logo" height="50" src="https://modin.readthedocs.io/en/latest/_images/MODIN_ver2_hrz.png"/>
+<img alt="Polars Logo" height="50" src="https://raw.githubusercontent.com/pola-rs/polars-static/master/logos/polars-logo-dimmed-medium.png"/>
+<img alt="Vaex Logo" height="50" src="https://vaex.io/docs/_static/logo-grey.svg"/>
 </div>
 </div>
 </div>
@@ -7857,7 +8014,215 @@ To check that pandas installed correctly, open a Python environment (Colab, Jupy
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Importing-the-Library-and-Loading-Data">Importing the Library and Loading Data<a class="anchor-link" href="#Importing-the-Library-and-Loading-Data">¶</a></h3><p>First, let's import pandas and load a sample dataset. Here, we’ll use a sample CSV file, which could represent any real-world dataset.</p>
+<h3 id="Using-Interactivity-in-Google-Colab">Using Interactivity in Google Colab<a class="anchor-link" href="#Using-Interactivity-in-Google-Colab">¶</a></h3><p>Interactive tables enable you to visualize, filter, and manipulate data in real time, making it easier to derive insights and present findings effectively.</p>
+<ol>
+<li>Interactive tables</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">data_table</span>
+<span class="n">data_table</span><span class="o">.</span><span class="n">enable_dataframe_formatter</span><span class="p">()</span>
+</pre></div>
+<ol start="2">
+<li>Interactive sheets</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1"># This will create a new interactive google sheet with the data in the dataframe passed as paramter (results_df)</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">sheets</span>
+<span class="n">sheet</span> <span class="o">=</span> <span class="n">sheets</span><span class="o">.</span><span class="n">InteractiveSheet</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">results_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">data_table</span>
+<span class="n">data_table</span><span class="o">.</span><span class="n">enable_dataframe_formatter</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can test it with any of the sample datasets provided:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">vega_datasets</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">list_datasets</span><span class="p">())</span>
+<span class="n">cars</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">cars</span><span class="p">()</span>
+<span class="n">cars</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Working-with-files">Working with files<a class="anchor-link" href="#Working-with-files">¶</a></h3><p>When working with Pandas, the preferred file formats depend on your specific use case, data size, and performance requirements.</p>
+<p>The most common are:</p>
+<table>
+<thead>
+<tr>
+<th><strong>File Format</strong></th>
+<th><strong>Best for</strong></th>
+<th><strong>Pros</strong></th>
+<th><strong>Cons</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CSV</strong></td>
+<td>Small to medium datasets, interoperability</td>
+<td>Simple, human-readable, supported everywhere</td>
+<td>Slower for large datasets, lacks metadata</td>
+</tr>
+<tr>
+<td><strong>Parquet</strong></td>
+<td>Large datasets, big data, columnar storage</td>
+<td>Fast, compressed, efficient for large datasets, schema support</td>
+<td>Not human-readable</td>
+</tr>
+<tr>
+<td><strong>Feather</strong></td>
+<td>Fast I/O, sharing data between Python &amp; R</td>
+<td>Fast, optimized for in-memory operations, cross-language support</td>
+<td>Not as compressed as Parquet</td>
+</tr>
+<tr>
+<td><strong>HDF5</strong></td>
+<td>Large datasets, hierarchical data</td>
+<td>Efficient for large datasets, supports compression and chunking</td>
+<td>Not human-readable, requires extra setup</td>
+</tr>
+<tr>
+<td><strong>Excel (XLSX)</strong></td>
+<td>Business environments, small to medium datasets</td>
+<td>Widely used, easy to open/edit, supports multiple sheets</td>
+<td>Slower, larger file size, less efficient</td>
+</tr>
+<tr>
+<td><strong>SQL Databases</strong></td>
+<td>Persistent storage, large datasets with querying</td>
+<td>Efficient querying, persistent, scalable storage</td>
+<td>Requires setup and maintenance</td>
+</tr>
+<tr>
+<td><strong>JSON</strong></td>
+<td>Data exchange between systems, hierarchical data</td>
+<td>Flexible, human-readable, supports nested data structures</td>
+<td>Can be verbose, less efficient for large datasets</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>More details in <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html">https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html</a></p>
+</blockquote>
+<p>We are going to work mostly with CSV files in the following examples for simplicity.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Read-from-file">Read from file<a class="anchor-link" href="#Read-from-file">¶</a></h3><p>The <code>pandas.read_csv()</code> function allows you to read CSV files into a DataFrame, which is the core data structure in Pandas. The basic syntax is:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Read a CSV file into a DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'path_to_file.csv'</span><span class="p">)</span>
+
+<span class="c1"># Print the DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+<p>Parameters of read_csv() (key ones):</p>
+<ul>
+<li>filepath_or_buffer: The path to the CSV file you want to read (can be a URL, local file path, or file-like object).</li>
+<li>sep: The delimiter that separates columns (default is comma ,). You can change it for other delimiters like - tabs (\t), semicolons (;), etc.</li>
+<li>header: Row number to use as column names (default is 0, meaning the first row is used for column names).</li>
+<li>index_col: Column(s) to set as the index (default is None).</li>
+<li>usecols: Specify a subset of columns to read (can be a list of column names or indices).</li>
+<li>dtype: Specify the data type for one or more columns.</li>
+<li>na_values: Additional strings to recognize as NA/NaN.</li>
+<li>skiprows: Number of lines to skip from the top of the file.</li>
+</ul>
+<blockquote>
+<p>For more details you can read the docs: <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html</a></p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Write-to-file">Write to file<a class="anchor-link" href="#Write-to-file">¶</a></h3><p>Once you have a DataFrame, you can write it to a CSV file using the <code>to_csv()</code> function. The basic syntax is:</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'output_file.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+<p>Parameters of to_csv() (key ones):</p>
+<ul>
+<li>path_or_buffer: The file path or buffer where the CSV will be saved.</li>
+<li>sep: The delimiter to use (default is comma ,).</li>
+<li>index: Whether to write row names (index) (default is True). If you don't want to include the index in the output file, set index=False.</li>
+<li>header: Whether to write the column names (default is True).</li>
+<li>columns: A subset of columns to write.</li>
+<li>mode: File opening mode ('w' for write, 'a' for append).</li>
+<li>na_rep: String to replace missing values (default is '').</li>
+<li>encoding: The encoding format to use for saving the file (e.g., 'utf-8').</li>
+</ul>
+<blockquote>
+<p>For more details read the docs <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html</a></p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Exploratory-Data-Analysis-with-Pandas">Exploratory Data Analysis with Pandas<a class="anchor-link" href="#Exploratory-Data-Analysis-with-Pandas">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Importing-the-Library-and-Loading-Data">Importing the Library and Loading Data<a class="anchor-link" href="#Importing-the-Library-and-Loading-Data">¶</a></h2><p>First, let's import pandas and load a sample dataset. Here, we’ll use a sample CSV file, which could represent any real-world dataset.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="c1"># Load data from a CSV file</span>
@@ -7867,6 +8232,18 @@ To check that pandas installed correctly, open a Python environment (Colab, Jupy
 <span class="c1"># Display the first few rows of the dataset</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>You can use the following to upload files to your Google Colab environment.
+Please, note that the files will be removed when the session is finished, so keep a local copy.</p>
 </div>
 </div>
 </div>
@@ -7897,9 +8274,6 @@ To check that pandas installed correctly, open a Python environment (Colab, Jupy
 
 <span class="c1"># Load data from a CSV file</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"sample_data/california_housing_test.csv"</span><span class="p">)</span>
-
-<span class="c1"># Display the first few rows of the dataset</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -7912,13 +8286,38 @@ To check that pandas installed correctly, open a Python environment (Colab, Jupy
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Understading-the-Data">Understading the Data<a class="anchor-link" href="#Understading-the-Data">¶</a></h3><ol>
-<li>Viewing the Structure of the DataFrame
-To get a quick overview of the DataFrame, use:</li>
-</ol>
+<h2 id="Understading-the-Data">Understading the Data<a class="anchor-link" href="#Understading-the-Data">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Structure-of-the-DataFrame">Structure of the DataFrame<a class="anchor-link" href="#Structure-of-the-DataFrame">¶</a></h3><p>To get a quick overview of the DataFrame, use the <strong>info</strong> command:</p>
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
-<p>This will show you the number of entries, column names, non-null counts, and data types.</p>
+<p>The <strong>shape</strong> command will tell us the number of rows and columns of the data</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+<p>With the <strong>head</strong> command we can get the first X rows of the dataframe</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+<p>If there are multiple columns in the dataframe, by default it will appear with ... hiding some of the columns in the middle. Exploring the data we are interested in viewing all the columns, to do that we can use the set_option of pandas and indicate a number of columns that is big enough to accomodate all the columns that we have.</p>
+<div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'max_columns'</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+<p>We can list the column names using the <strong>columns</strong> command</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+<p>Each column in a dataframe is a series of data, and as such it´s associated with a data type in pandas.
+To list the data types for each column we use the dtypes command</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+<p><strong>Describe</strong> will show you the number of entries, column names, non-null counts, and data types.</p>
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 <p>The output is another DataFrame that includes several key statistics for each numerical column:</p>
@@ -7932,39 +8331,57 @@ To get a quick overview of the DataFrame, use:</li>
 <li>75%: The third quartile, or the 75th percentile.</li>
 <li>max: The maximum value.</li>
 </ul>
-<ol start="2">
-<li>Listing Columns
-To list all the columns in the DataFrame:</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-<p>This is useful if we need to iterate through the columns of the dataframe</p>
-<ol start="3">
-<li>Finding Minimum and Maximum Values
-To find the minimum and maximum values of numerical columns:</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="n">min_values</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-<span class="n">max_values</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-</pre></div>
-<blockquote>
-<p>You can calculate other values like standard deviation, quantile, mean, mode and more using the same syntax.</p>
-</blockquote>
-<ol start="4">
-<li>Counting Unique Values
-To get the number of unique values in each column:</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="n">unique_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of unique values:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">unique_counts</span><span class="p">)</span>
-</pre></div>
-<p>You can also get the list of unique values using
-unique_values = df[column].unique()</p>
-<ol start="5">
-<li>Counting Null Values
-To count the number of null values in each column:</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="n">null_counts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of null values:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">null_counts</span><span class="p">)</span>
-</pre></div>
+<table>
+<thead>
+<tr>
+<th><strong>Aspect</strong></th>
+<th><strong><code>df.info()</code></strong></th>
+<th><strong><code>df.describe()</code></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>Overview of DataFrame structure and missing data</td>
+<td>Summary statistics of numerical columns</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>Data types, non-null counts, memory usage</td>
+<td>Statistical summary (mean, min, max, std, etc.)</td>
+</tr>
+<tr>
+<td><strong>Works on</strong></td>
+<td>All columns, including non-numeric columns</td>
+<td>By default, only numerical columns</td>
+</tr>
+<tr>
+<td><strong>Missing Values</strong></td>
+<td>Shows count of non-null values</td>
+<td>Shows count of non-null values (for each column)</td>
+</tr>
+<tr>
+<td><strong>Data Types</strong></td>
+<td>Shows data types (e.g., <code>int64</code>, <code>float64</code>)</td>
+<td>Doesn't show data types, only summary stats</td>
+</tr>
+<tr>
+<td><strong>Statistical Summary</strong></td>
+<td>Does not provide any statistical measures</td>
+<td>Provides mean, std, min, max, percentiles, etc.</td>
+</tr>
+<tr>
+<td><strong>Categorical Data</strong></td>
+<td>Shows dtype for object columns (strings)</td>
+<td>Can summarize categorical data if specified (<code>include='object'</code>)</td>
+</tr>
+<tr>
+<td><strong>When to Use</strong></td>
+<td>Use when you need a quick check on the <strong>structure</strong> of the DataFrame, including data types, non-null counts, and memory usage</td>
+<td>Use when you want to quickly get <strong>summary statistics</strong> for the numerical columns, such as mean, median, standard deviation, and percentiles</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -7976,7 +8393,7 @@ To count the number of null values in each column:</li>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -7990,7 +8407,8 @@ To count the number of null values in each column:</li>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Display the first few rows of the dataset</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -8032,6 +8450,96 @@ To count the number of null values in each column:</li>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Listing-Columns">Listing Columns<a class="anchor-link" href="#Listing-Columns">¶</a></h3><p>To list all the columns in the DataFrame:</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+<p>This is useful if we need to iterate through the columns of the dataframe</p>
+<p>We can also get the data type of each column with</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Finding-Minimum-and-Maximum-Values">Finding Minimum and Maximum Values<a class="anchor-link" href="#Finding-Minimum-and-Maximum-Values">¶</a></h3><p>To find the minimum and maximum values of numerical columns you can use the dataframe functions or NumPy as we´ve seen before.</p>
+<div class="highlight"><pre><span></span><span class="n">min_values</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">max_values</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+<blockquote>
+<p>You can calculate other values like standard deviation, quantile, mean, mode and more using the same syntax.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-python"><pre><span></span><span class="c1"># Create a dictionary to store results</span>
 <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -8062,11 +8570,77 @@ To count the number of null values in each column:</li>
         <span class="s1">'count_non_null'</span><span class="p">:</span> <span class="n">non_numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
     <span class="p">}</span>
 
+
 <span class="c1"># Convert results to a DataFrame for better visualization</span>
 <span class="c1"># the .T attribute is used to transpose the DataFrame</span>
 <span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 
 <span class="n">results_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Counting-Unique-Values">Counting Unique Values<a class="anchor-link" href="#Counting-Unique-Values">¶</a></h3><p>To get the number of unique values in each column:</p>
+<div class="highlight"><pre><span></span><span class="n">unique_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of unique values:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">unique_counts</span><span class="p">)</span>
+</pre></div>
+<p>You can also get the list of unique values using
+unique_values = df[column].unique()</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Get number of unique values of each column as a dictionary</span>
+<span class="n">nunique_values_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nunique_values_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Counting-Null-Values">Counting Null Values<a class="anchor-link" href="#Counting-Null-Values">¶</a></h3><p>To count the number of null values in each column:</p>
+<div class="highlight"><pre><span></span><span class="n">null_counts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of null values:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">null_counts</span><span class="p">)</span>
+</pre></div>
+<blockquote>
+<p><code>isnull()</code> and <code>isna()</code> are equivalent function to identify the missing values</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">null_counts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of null values:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">null_counts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8080,9 +8654,7 @@ To count the number of null values in each column:</li>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># This will create a new interactive google sheet with the data in the dataframe passed as paramter (results_df)</span>
-<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">sheets</span>
-<span class="n">sheet</span> <span class="o">=</span> <span class="n">sheets</span><span class="o">.</span><span class="n">InteractiveSheet</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">results_df</span><span class="p">)</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Playground to explore with functions to understand the dataframe</span>
 </pre></div>
 </div>
 </div>
@@ -8164,7 +8736,7 @@ To count the number of null values in each column:</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="%F0%9F%8F%86-Understanding-the-Data-Challenge">🏆 Understanding the Data Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Understanding-the-Data-Challenge">¶</a></h4><p><strong>Descriptive Statistics Calculation of NYC Taxi Trips</strong></p>
+<h2 id="%F0%9F%8F%86-Understanding-the-Data-Challenge">🏆 Understanding the Data Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Understanding-the-Data-Challenge">¶</a></h2><p><strong>Descriptive Statistics Calculation of NYC Taxi Trips</strong></p>
 <p>In this challenge, you will analyze a dataset to calculate descriptive statistics for both numeric and non-numeric columns.</p>
 <p>The goal of this challenge is to create a dictionary that stores descriptive statistics for each column in the dataset.</p>
 <p>This will include metrics for numeric columns (like min, max, mean, standard deviation, percentiles, and unique counts) and key statistics for non-numeric columns (like unique counts and the most common value).</p>
@@ -8211,6 +8783,128 @@ To count the number of null values in each column:</li>
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df_taxi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df_taxi</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df_taxi</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Create a dictionary to store results</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Calculate metrics for numeric columns</span>
+<span class="n">numeric_df</span> <span class="o">=</span> <span class="n">df_taxi</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">'number'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">numeric_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'min'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+        <span class="s1">'max'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+        <span class="s1">'mean'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="s1">'std'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>
+        <span class="s1">'count'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
+        <span class="s1">'p90'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">),</span>
+        <span class="s1">'p75'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">),</span>
+        <span class="s1">'p50'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+        <span class="s1">'p25'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">),</span>
+        <span class="s1">'unique_count'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span>
+        <span class="s1">'most_common'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">'count_non_null'</span><span class="p">:</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
+    <span class="p">}</span>
+
+<span class="c1"># Calculate metrics for non-numeric columns</span>
+<span class="n">non_numeric_df</span> <span class="o">=</span> <span class="n">df_taxi</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="s1">'number'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">non_numeric_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'unique_count'</span><span class="p">:</span> <span class="n">non_numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span>
+        <span class="s1">'most_common'</span><span class="p">:</span> <span class="n">non_numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="s1">'count_non_null'</span><span class="p">:</span> <span class="n">non_numeric_df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
+    <span class="p">}</span>
+
+<span class="c1"># Convert results to a DataFrame for better visualization</span>
+<span class="c1"># the .T attribute is used to transpose the DataFrame</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">results_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">nunique_values_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">df_taxi</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_taxi</span><span class="o">.</span><span class="n">columns</span><span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nunique_values_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">null_counts</span> <span class="o">=</span> <span class="n">df_taxi</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of null values:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">null_counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -8218,12 +8912,277 @@ To count the number of null values in each column:</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Data-Cleaning">Data Cleaning<a class="anchor-link" href="#Data-Cleaning">¶</a></h3><p>Real-world datasets often have missing or inconsistent data. Pandas makes it easy to identify and clean this data.</p>
-<p>We can apply different strategies</p>
-<ol>
-<li>Handling Missing Values</li>
-</ol>
-<p>In case of a missing value we can fill it with an aggregated value like the mean of the column.</p>
+<h2 id="Data-Cleaning">Data Cleaning<a class="anchor-link" href="#Data-Cleaning">¶</a></h2><p>Real-world datasets often have missing or inconsistent data. Pandas makes it easy to identify and clean this data.</p>
+<p>Make sure to always do a copy of your dataframe to be able to go back to the source.</p>
+<p>The way to do it is using the .<strong>copy</strong> function</p>
+<div class="highlight"><pre><span></span><span class="n">df_modified</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Renaming-columns">Renaming columns<a class="anchor-link" href="#Renaming-columns">¶</a></h3><p>We can change the name of the columns of the dataframe using the <strong>rename</strong> function. This functions takes as parameter a dictionary with the old column names as key and the new column names as values.</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">'old_column_name1'</span><span class="p">:</span><span class="s1">'new_column_name1'</span><span class="p">,</span>
+  <span class="s1">'old_column_name2'</span><span class="p">:</span><span class="s1">'new_column_name2'</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'housing_median_age'</span><span class="p">:</span> <span class="s1">'median_house_age'</span><span class="p">})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Changing-the-format-of-columns">Changing the format of columns<a class="anchor-link" href="#Changing-the-format-of-columns">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Using-astype()-function">Using <code>astype()</code> function<a class="anchor-link" href="#Using-astype()-function">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Sample DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">'A'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="s1">'3'</span><span class="p">],</span>
+    <span class="s1">'B'</span><span class="p">:</span> <span class="p">[</span><span class="mf">10.5</span><span class="p">,</span> <span class="mf">20.2</span><span class="p">,</span> <span class="mf">30.3</span><span class="p">],</span>
+    <span class="s1">'C'</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.512</span><span class="p">,</span> <span class="mf">2.023</span><span class="p">,</span> <span class="mf">3.653</span><span class="p">],</span>
+    <span class="s1">'Date'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'2024-01-01'</span><span class="p">,</span> <span class="s1">'2024-02-01'</span><span class="p">,</span> <span class="s1">'2024-03-01'</span><span class="p">],</span>
+    <span class="s1">'Name'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'alice'</span><span class="p">,</span> <span class="s1">'bob'</span><span class="p">,</span> <span class="s1">'charlie'</span><span class="p">],</span>
+    <span class="s1">'Amount'</span><span class="p">:</span> <span class="p">[</span><span class="mf">1500.5</span><span class="p">,</span> <span class="mf">2500.75</span><span class="p">,</span> <span class="mf">3000.45</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Change column 'A' from string integer</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'A'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'A'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Change column 'B' from float to integer</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Rounding-numeric-columns">Rounding numeric columns<a class="anchor-link" href="#Rounding-numeric-columns">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'C'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'C'</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Formatting-strings">Formatting strings<a class="anchor-link" href="#Formatting-strings">¶</a></h4><p>Applying lambda functions to the column for example to add 0´s to the left</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'A'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'A'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">03</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Converting-dates">Converting dates<a class="anchor-link" href="#Converting-dates">¶</a></h4><p>If you have date columns, you can use <code>pd.to_datetime()</code> to convert them to datetime format and <code>dt.strftime()</code> to display them in a specific format.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'</span><span class="si">%a</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> %B %Y'</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Altering-the-text-case">Altering the text case<a class="anchor-link" href="#Altering-the-text-case">¶</a></h4><p>For example we can choose to convert all the values in a string column to upper case.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'Name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Name'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Formatting-currency">Formatting currency<a class="anchor-link" href="#Formatting-currency">¶</a></h4><p>If we are working with monetary values we might want to format the amount accordingly.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'Amount_EUR'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Amount'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">,.2f</span><span class="si">}</span><span class="s2"> €"</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Extracting-parts-of-a-string">Extracting parts of a string<a class="anchor-link" href="#Extracting-parts-of-a-string">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'Name_initial'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Name'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Handling-Missing-Values">Handling Missing Values<a class="anchor-link" href="#Handling-Missing-Values">¶</a></h3><p>In case of a missing value we can fill it with an aggregated value like the mean of the column.</p>
 <ul>
 <li><p>Initial Check:</p>
 <p>Start with <code>df.isnull().sum()</code> to get a quick overview of null values in the dataframe</p>
@@ -8245,13 +9204,6 @@ To count the number of null values in each column:</li>
 <span class="c1"># Verify that there are no more missing values</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of null values after filling:</span><span class="se">\n</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
-<ol start="2">
-<li>Dropping Duplicates</li>
-</ol>
-<p>In case of missing values we can also delete all the row.</p>
-<div class="highlight"><pre><span></span><span class="c1"># Drop duplicate rows, if any</span>
-<span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
 </div>
 </div>
 </div>
@@ -8262,7 +9214,192 @@ To count the number of null values in each column:</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="%F0%9F%8F%86-Data-Cleaning-Challenge">🏆 Data Cleaning Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Data-Cleaning-Challenge">¶</a></h4><p><strong>Data Cleaning of Taxi Trip Data</strong></p>
+<ol start="2">
+<li>Discarding Null values</li>
+</ol>
+<p>In case of missing values we can also delete all the row.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Drop rows with missing values, if any</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+<blockquote>
+<p>💡 When you´re doing cleanup task, it´s usually better to create a copy of the dataframe so that you can always go back to the initial version</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="c1"># Drop rows with missing values, if any without modifying the original dataframe</span>
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Sample DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">'Date'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'2024-01-01'</span><span class="p">,</span> <span class="s1">'2024-02-01'</span><span class="p">,</span> <span class="s1">'2024-03-01'</span><span class="p">],</span>
+    <span class="s1">'Name'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'alice'</span><span class="p">,</span> <span class="s1">'bob'</span><span class="p">,</span> <span class="s1">'charlie'</span><span class="p">],</span>
+    <span class="s1">'Amount'</span><span class="p">:</span> <span class="p">[</span><span class="mf">1500.5</span><span class="p">,</span> <span class="mf">2500.75</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1">#df.loc[] usues boolean indexing to select the rows from the dataframe that has any null</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Identify-outliers">Identify outliers<a class="anchor-link" href="#Identify-outliers">¶</a></h3><p><strong>Outliers</strong> are data points that differ significantly from the majority of the data. They could represent extreme values or rare events, but they could also be due to errors in data collection, measurement, or entry.</p>
+<p>There are several techniques to identify outliers in a DataFrame. The most common methods are:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IQR (Interquartile Range)</strong></td>
+<td>Calculates Q1, Q3, and IQR; identifies outliers outside <code>Q1 - 1.5 * IQR</code> and <code>Q3 + 1.5 * IQR</code></td>
+<td>When you need to detect data points far from the central data</td>
+</tr>
+<tr>
+<td><strong>Z-Score</strong></td>
+<td>Calculates the Z-score to find data points with high deviation from the mean</td>
+<td>When data is normally distributed and outliers are extreme</td>
+</tr>
+<tr>
+<td><strong>Boxplot</strong></td>
+<td>Visualizes the distribution and outliers using quartiles and whiskers</td>
+<td>For visual detection of outliers in univariate data</td>
+</tr>
+<tr>
+<td><strong>Scatter Plot</strong></td>
+<td>Visualizes outliers in bivariate data by showing points far from clusters of data points</td>
+<td>For identifying outliers in two-variable relationships</td>
+</tr>
+<tr>
+<td><strong>Pairplot (Multivariate)</strong></td>
+<td>Visualizes pairwise relationships in high-dimensional datasets</td>
+<td>For multidimensional data and identifying outliers in multiple features</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">vega_datasets</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="n">cars</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">cars</span><span class="p">()</span>
+
+<span class="c1"># Display the first few rows to understand the data structure</span>
+<span class="c1"># print(cars.head())</span>
+<span class="c1"># Calculate Q1 (25th percentile) and Q3 (75th percentile) for the 'horsepower' column</span>
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">cars</span><span class="p">[</span><span class="s1">'Horsepower'</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">cars</span><span class="p">[</span><span class="s1">'Horsepower'</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+
+<span class="c1"># Calculate IQR</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+
+<span class="c1"># Define bounds for outliers</span>
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+<span class="c1"># Identify outliers in the 'horsepower' column</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="n">cars</span><span class="p">[(</span><span class="n">cars</span><span class="p">[</span><span class="s1">'Horsepower'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">cars</span><span class="p">[</span><span class="s1">'Horsepower'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">)]</span>
+
+<span class="c1"># Display the outliers</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Outliers detected in 'horsepower' column:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers</span><span class="p">[[</span><span class="s1">'Name'</span><span class="p">,</span> <span class="s1">'Horsepower'</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="%F0%9F%8F%86-Data-Cleaning-Challenge">🏆 Data Cleaning Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Data-Cleaning-Challenge">¶</a></h2><p><strong>Data Cleaning of Taxi Trip Data</strong></p>
 <p>In this challenge, you will work with a dataset of yellow taxi trip data to perform data cleaning tasks. Your objective is to handle missing values in the dataset appropriately, ensuring that it is ready for analysis.</p>
 <p>The data source will be the parquet file located at <a href="https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet">https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet</a></p>
 <p>Steps to Accomplish the Challenge</p>
@@ -8295,7 +9432,65 @@ To count the number of null values in each column:</li>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df_taxi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Check for missing values</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of null values:</span><span class="se">\n</span><span class="si">{</span><span class="n">df_taxi</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Fill missing values</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df_taxi</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+   <span class="k">if</span> <span class="n">df_taxi</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'float64'</span><span class="p">,</span> <span class="s1">'int64'</span><span class="p">]:</span>  <span class="c1"># Check if the column is numeric</span>
+       <span class="n">df_taxi</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_taxi</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_taxi</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>  <span class="c1"># Fill with mean</span>
+   <span class="k">elif</span> <span class="n">df_taxi</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s1">'object'</span><span class="p">:</span>  <span class="c1"># Check if the column is categorical</span>
+       <span class="n">df_taxi</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_taxi</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_taxi</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Fill with mode</span>
+
+<span class="c1"># Verify that there are no more missing values</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of null values after filling:</span><span class="se">\n</span><span class="si">{</span><span class="n">df_taxi</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Another way to fill the null values more flexible and scalable</span>
+
+<span class="c1"># Fill numeric columns with their mean and object columns with their mode using a dictionary</span>
+<span class="n">fill_values</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">df_taxi</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">if</span> <span class="n">df_taxi</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'float64'</span><span class="p">,</span> <span class="s1">'int64'</span><span class="p">]</span> <span class="k">else</span> <span class="n">df_taxi</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+               <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_taxi</span><span class="o">.</span><span class="n">columns</span><span class="p">}</span>
+
+<span class="n">df_taxi</span> <span class="o">=</span> <span class="n">df_taxi</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">fill_values</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8308,16 +9503,42 @@ To count the number of null values in each column:</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Filtering-and-Selecting-Data">Filtering and Selecting Data<a class="anchor-link" href="#Filtering-and-Selecting-Data">¶</a></h3><p>Pandas makes it easy to filter data based on certain conditions and select specific columns.</p>
-<ol>
-<li>Selecting Columns</li>
-</ol>
+<h2 id="Filtering-and-Selecting-Data">Filtering and Selecting Data<a class="anchor-link" href="#Filtering-and-Selecting-Data">¶</a></h2><p>Pandas makes it easy to filter data based on certain conditions and select specific columns.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Selecting-Columns">Selecting Columns<a class="anchor-link" href="#Selecting-Columns">¶</a></h3><p>We can use the <strong><code>[[]]</code></strong> syntax to indicate the columns to be selected.</p>
 <div class="highlight"><pre><span></span><span class="c1"># Select specific columns</span>
 <span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'Column1'</span><span class="p">,</span> <span class="s1">'Column2'</span><span class="p">]]</span>
 </pre></div>
-<ol start="2">
-<li>Filtering Rows Based on Conditions</li>
-</ol>
+<p>Or we can use the <strong>drop</strong> function to remove the columns that we don´t want.</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Column3'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+<blockquote>
+<p>Pandas DataFrames have 2 main axes:</p>
+</blockquote>
+<ul>
+<li>axis=0: Represents the rows (or index) of the DataFrame.</li>
+<li>axis=1: Represents the columns of the DataFrame.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Filtering-Rows-Based-on-Conditions">Filtering Rows Based on Conditions<a class="anchor-link" href="#Filtering-Rows-Based-on-Conditions">¶</a></h3><p>We can select elements in the dataframe that meet a condition in this way:</p>
 <div class="highlight"><pre><span></span><span class="c1"># Filter rows where 'Column1' &gt; 50</span>
 <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'Column1'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">]</span>
 </pre></div>
@@ -8325,6 +9546,44 @@ To count the number of null values in each column:</li>
 <div class="highlight"><pre><span></span><span class="c1"># Filter rows where 'Column1' &gt; 50 and at the same time 'Column2' &gt; 0</span>
 <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Column1'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Column2'</span><span class="p">]</span><span class="o">&gt;</span> <span class="mi">0</span><span class="p">)]</span>
 </pre></div>
+<p>We can also achieve the same using the <strong>query</strong> operations</p>
+<div class="highlight"><pre><span></span><span class="c1"># Filter rows where 'Column1' &gt; 50</span>
+<span class="n">filtered_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">'Column1 &gt; 50  &amp; Column2 &gt; 0'</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># We are going to get a dataframe</span>
+<span class="c1"># with longitude, latitude, median_house_value</span>
+<span class="c1"># where median_house_value is &lt; 200000 and media housing_median_age &gt; 30</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">'median_house_value'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">200000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'housing_median_age'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">)]</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[[</span><span class="s1">'longitude'</span><span class="p">,</span> <span class="s1">'latitude'</span><span class="p">,</span> <span class="s1">'median_house_value'</span><span class="p">,</span> <span class="s1">'housing_median_age'</span><span class="p">]]</span>
+<span class="n">df_filtered</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">'median_house_value &lt; 200000 &amp; housing_median_age &gt; 30'</span><span class="p">)[[</span><span class="s1">'longitude'</span><span class="p">,</span> <span class="s1">'latitude'</span><span class="p">,</span> <span class="s1">'median_house_value'</span><span class="p">,</span> <span class="s1">'housing_median_age'</span><span class="p">]]</span>
+<span class="n">df_filtered</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -8335,7 +9594,89 @@ To count the number of null values in each column:</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="%F0%9F%8F%86-Filtering-and-Selecting-Data-challenge">🏆 Filtering and Selecting Data challenge<a class="anchor-link" href="#%F0%9F%8F%86-Filtering-and-Selecting-Data-challenge">¶</a></h4><p><strong>Filtering Taxi Trip Data</strong></p>
+<p>When we filter rows in the dataframe, this makes the index to have jumps because of the removed elements.
+We can fix it with the <strong>reset_index</strong> command.
+Doing the reset_index moves the old index as a column of the dataframe by default, but as this information is not useful for our purposes we use the <code>drop=True</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_filtered</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Finding-duplicates">Finding duplicates<a class="anchor-link" href="#Finding-duplicates">¶</a></h3><p>To check the data quality of the dataframe is very interesting to find any duplicated key element.</p>
+<p>To find duplicated rows we can use the <strong>duplicated</strong> function that returns a series fo boolean values indicating if the row is duplicated or not.</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can also look for rows where a certain column or combination of columns is duplicated.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df_duplicated</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'longitude'</span><span class="p">,</span><span class="s1">'latitude'</span><span class="p">])]</span>
+<span class="n">df_duplicated</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="%F0%9F%8F%86-Filtering-and-Selecting-Data-challenge">🏆 Filtering and Selecting Data challenge<a class="anchor-link" href="#%F0%9F%8F%86-Filtering-and-Selecting-Data-challenge">¶</a></h2><p><strong>Filtering Taxi Trip Data</strong></p>
 <p>In this challenge, you will work with a dataset of yellow taxi trip data to filter out trips based on specific criteria related to passenger count and trip distance. Your objective is to create a new DataFrame that includes only valid taxi trips for further analysis.</p>
 <p>The data source will be the parquet file located at <a href="https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet">https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet</a></p>
 <p>Conditions:</p>
@@ -8371,6 +9712,38 @@ The trip_distance must be greater than 0.</p>
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df_taxi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">filtered_data</span> <span class="o">=</span> <span class="n">df_taxi</span><span class="p">[(</span><span class="n">df_taxi</span><span class="p">[</span><span class="s1">'passenger_count'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_taxi</span><span class="p">[</span><span class="s1">'passenger_count'</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_taxi</span><span class="p">[</span><span class="s1">'trip_distance'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)]</span>
+
+<span class="n">filtered_data</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[[</span><span class="s1">'passenger_count'</span><span class="p">,</span> <span class="s1">'trip_distance'</span><span class="p">,</span> <span class="s1">'fare_amount'</span><span class="p">,</span> <span class="s1">'tip_amount'</span><span class="p">,</span> <span class="s1">'total_amount'</span><span class="p">,</span> <span class="s1">'VendorID'</span><span class="p">,</span><span class="s1">'tpep_pickup_datetime'</span><span class="p">,</span> <span class="s1">'tpep_dropoff_datetime'</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filtered_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -8378,9 +9751,83 @@ The trip_distance must be greater than 0.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Grouping-and-Aggregating-Data">Grouping and Aggregating Data<a class="anchor-link" href="#Grouping-and-Aggregating-Data">¶</a></h3><p>Grouping data is essential in data analytics to calculate summary statistics for different categories.</p>
-<p>We use <code>groupby</code> to group the DataFrame by the indicated column. Each unique value of it will create a separate group. For example, if there are groups for 1, 2, 3, etc., each of these groups will consist of rows.</p>
+<h2 id="Grouping-and-Aggregating-Data">Grouping and Aggregating Data<a class="anchor-link" href="#Grouping-and-Aggregating-Data">¶</a></h2><p>Grouping data is essential in data analytics to calculate summary statistics for different categories.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Categorical-values">Categorical values<a class="anchor-link" href="#Categorical-values">¶</a></h3><p>📝 A category column (or categorical column) in a dataset refers to a column that contains discrete values representing categories or groups rather than continuous numeric data.</p>
+<ul>
+<li>Non-Numeric Data: The values in a categorical column are usually non-numeric. For example, values like "red," "blue," "male," "female," or "low," "medium," "high" are common.</li>
+<li>Finite Set of Values: The possible values in a category column are usually finite and limited. For example, the "color" column might only contain values like "red," "green," or "blue."</li>
+<li>Labels or Groups: The values represent labels or groups for the data. These groups may or may not have an inherent order (ordinal or nominal).</li>
+<li>Efficient Storage: In Pandas, categorical columns can be stored using a special Categorical type, which is more memory-efficient than using object types, especially with large datasets. <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.astype.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.astype.html</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Benefits of <code>.astype('category')</code></p>
+<ul>
+<li>Memory efficiency: Significant reduction in memory usage by storing repeated values as integer codes.</li>
+<li>Faster operations: Integer-based operations are much faster than string operations (e.g., grouping, sorting).</li>
+<li>Efficient for repeated values: Ideal for columns with a small number of unique values but many rows.</li>
+<li>Data integrity: You can define a limited set of categories and prevent invalid entries.</li>
+<li>Support for ordinal data: Enables sorting and comparison based on the inherent order of categories.</li>
+<li>Improved performance: Better performance for grouping, joining, and other operations involving categorical data.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">vega_datasets</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="n">df_countries</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">countries</span><span class="p">()</span>
+<span class="n">df_countries</span><span class="p">[</span><span class="s1">'country'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_countries</span><span class="p">[</span><span class="s1">'country'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'category'</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_countries</span><span class="p">[[</span><span class="s1">'country'</span><span class="p">,</span><span class="s1">'year'</span><span class="p">,</span> <span class="s1">'life_expect'</span><span class="p">,</span> <span class="s1">'fertility'</span><span class="p">]]</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Groupby">Groupby<a class="anchor-link" href="#Groupby">¶</a></h3><p>We use <code>groupby</code> to group the DataFrame by the indicated column. Each unique value of it will create a separate group. For example, if there are groups for 1, 2, 3, etc., each of these groups will consist of rows.</p>
 <p>There are multiple aggregate functions that can be used:</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <ul>
 <li><code>sum()</code>:Calculates the sum of the values for each group.</li>
 </ul>
@@ -8411,25 +9858,69 @@ The trip_distance must be greater than 0.</p>
 </ul>
 <div class="highlight"><pre><span></span><span class="n">grouped_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'CategoryColumn'</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1">#Playground : Use this cell to explore</span>
+<span class="n">grouped_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'country'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">grouped_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <ul>
 <li><code>first()</code>: Returns the first value in each group.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="c1"># Sample DataFrame</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Category'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'A'</span><span class="p">,</span> <span class="s1">'A'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'C'</span><span class="p">,</span> <span class="s1">'C'</span><span class="p">],</span>
-    <span class="s1">'Value'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
-    <span class="s1">'Date'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'2024-01-01'</span><span class="p">,</span> <span class="s1">'2024-01-02'</span><span class="p">,</span> <span class="s1">'2024-02-01'</span><span class="p">,</span> <span class="s1">'2024-02-03'</span><span class="p">,</span> <span class="s1">'2024-03-02'</span><span class="p">,</span> <span class="s1">'2024-03-01'</span><span class="p">]</span>
-<span class="p">}</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="c1"># Convert 'Date' to datetime</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">])</span>
-<span class="c1"># Sort the DataFrame by 'Category' and 'Date'</span>
+<div class="highlight"><pre><span></span><span class="c1"># Sort the DataFrame by 'Category' and 'Date'</span>
 <span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">'Category'</span><span class="p">,</span> <span class="s1">'Date'</span><span class="p">])</span>
 <span class="c1"># Group by 'Category' and get the first entry for each group</span>
 <span class="n">first_entries</span> <span class="o">=</span> <span class="n">df_sorted</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'Category'</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">first_entries</span><span class="p">)</span>
 </pre></div>
+<ul>
+<li><code>last()</code>: Returns the last value in each group.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">'country'</span><span class="p">,</span> <span class="s1">'year'</span><span class="p">])</span>
+<span class="n">grouped_data</span> <span class="o">=</span> <span class="n">df_sorted</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'country'</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">grouped_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <ul>
 <li><p><code>agg()</code>:   The <code>agg()</code> function is used to specify the aggregation operations that will be applied to each group created by the <code>groupby()</code>. This allows you to calculate multiple statistics in a single step.</p>
 <p>Inside <code>agg()</code>, each aggregation is defined in the format <code>new_column_name=('original_column_name', 'function')</code>.
@@ -8441,7 +9932,7 @@ This creates a new column named new_column_name in the resulting DataFrame.</p>
 </blockquote>
 <p><strong>Implications of Not Using reset_index()</strong></p>
 <ul>
-<li><p>Accessing Data: You will have to use the .loc[] or .iloc[] methods to access the data, which can be less intuitive than working with a standard DataFrame.</p>
+<li><p>Accessing Data: You will have to use the <code>.loc[]</code> or <code>.iloc[]</code> methods to access the data, which can be less intuitive than working with a standard DataFrame.</p>
 </li>
 <li><p>DataFrame Appearance: The DataFrame will look different because the columns used to group by will be part of the index rather than a column, which may make it harder to interpret at a glance.</p>
 </li>
@@ -8459,7 +9950,28 @@ This creates a new column named new_column_name in the resulting DataFrame.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-python"><pre><span></span><span class="c1"># Use this as a playground to explore with grouping and aggregations</span>
+
+<span class="n">df_summary</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'country'</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">'year'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'min'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">],</span>           <span class="c1"># First and last year with data</span>
+    <span class="s1">'life_expect'</span><span class="p">:</span> <span class="s1">'mean'</span><span class="p">,</span>            <span class="c1"># Average GDP</span>
+    <span class="s1">'fertility'</span><span class="p">:</span> <span class="s1">'median'</span>             <span class="c1"># Median fertility</span>
+<span class="p">})</span>
+<span class="n">df_summary</span>
 </pre></div>
 </div>
 </div>
@@ -8472,7 +9984,7 @@ This creates a new column named new_column_name in the resulting DataFrame.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="%F0%9F%8F%86-Grouping-and-Aggregating-Data-Challenge">🏆 Grouping and Aggregating Data Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Grouping-and-Aggregating-Data-Challenge">¶</a></h4><p><strong>Does the number of passengers affect the tip amount for the taxi trip?</strong></p>
+<h2 id="%F0%9F%8F%86-Grouping-and-Aggregating-Data-Challenge">🏆 Grouping and Aggregating Data Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Grouping-and-Aggregating-Data-Challenge">¶</a></h2><p><strong>Does the number of passengers affect the tip amount for the taxi trip?</strong></p>
 <p>You are tasked with analyzing taxi trip data to understand how passenger count affects tipping behavior and trip characteristics.</p>
 <p>Using the filtered DataFrame from the previous challenge, calculate the average tip amount, average trip distance, and the total number of trips for different passenger counts.</p>
 <ul>
@@ -8511,6 +10023,26 @@ This creates a new column named new_column_name in the resulting DataFrame.</p>
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">average_stats</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'passenger_count'</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">average_tip</span><span class="o">=</span><span class="p">(</span><span class="s1">'tip_amount'</span><span class="p">,</span> <span class="s1">'mean'</span><span class="p">),</span>
+    <span class="n">average_trip_distance</span><span class="o">=</span><span class="p">(</span><span class="s1">'trip_distance'</span><span class="p">,</span> <span class="s1">'mean'</span><span class="p">),</span>
+    <span class="n">number_trips</span><span class="o">=</span><span class="p">(</span><span class="s1">'tip_amount'</span><span class="p">,</span> <span class="s1">'count'</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c1"># The reset_index() method is called to convert the grouped object back into a DataFrame.</span>
+<span class="n">average_stats</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -8518,9 +10050,30 @@ This creates a new column named new_column_name in the resulting DataFrame.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Data-Visualization-with-Pandas">Data Visualization with Pandas<a class="anchor-link" href="#Data-Visualization-with-Pandas">¶</a></h3><p>You can create quick plots directly from pandas, which integrates well with Matplotlib for more complex visualizations.</p>
-<p>Matplotlib</p>
+<h2 id="Data-Visualization-with-Pandas">Data Visualization with Pandas<a class="anchor-link" href="#Data-Visualization-with-Pandas">¶</a></h2><p>You can create quick plots directly from pandas, which integrates well with Matplotlib for more complex visualizations.</p>
+<p>For <strong>Feature understanding</strong>, also called univariate analysis we use:</p>
 <ul>
+<li>Histogram</li>
+<li>KDE</li>
+<li>Boxplot</li>
+</ul>
+<p>For <strong>Feature relationships</strong>, also known as multivariate analysis the most frequent chart types are:</p>
+<ul>
+<li>Scatterplot</li>
+<li>Heatmap correlation</li>
+<li>Pairplot</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Matplotlib-summary">Matplotlib summary<a class="anchor-link" href="#Matplotlib-summary">¶</a></h3><ul>
 <li>Line Chart: Used to display data points connected by straight lines, ideal for showing trends over time. <code>plt.plot(x, y)</code></li>
 <li>Bar Chart: Displays data with rectangular bars representing the values, useful for comparing different categories. <code>plt.bar(x, height)</code></li>
 <li>Horizontal Bar Chart: Similar to a bar chart, but bars are displayed horizontally. <code>plt.barh(y, width)</code></li>
@@ -8547,7 +10100,7 @@ This creates a new column named new_column_name in the resulting DataFrame.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Simple-Line-Plot">Simple Line Plot<a class="anchor-link" href="#Simple-Line-Plot">¶</a></h4><p>A simple line chart is best used in the following scenarios:</p>
+<h3 id="Simple-Line-Plot">Simple Line Plot<a class="anchor-link" href="#Simple-Line-Plot">¶</a></h3><p>A simple line chart is best used in the following scenarios:</p>
 <ul>
 <li><p><strong>Time Series Data</strong>: When you want to visualize trends over time, such as daily, monthly, or yearly data. Line charts effectively show how values change over intervals.</p>
 </li>
@@ -8616,7 +10169,7 @@ This creates a new column named new_column_name in the resulting DataFrame.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="%F0%9F%8F%86-Line-Chart-Challenge">🏆 Line Chart Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Line-Chart-Challenge">¶</a></h4><p><strong>Analyzing Daily Taxi Trip Data</strong></p>
+<h3 id="%F0%9F%8F%86-Line-Chart-Challenge">🏆 Line Chart Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Line-Chart-Challenge">¶</a></h3><p><strong>Analyzing Daily Taxi Trip Data</strong></p>
 <p>The objective of this challenge is to analyze and visualize daily taxi trip data for January 2024. You will calculate the number of trips taken each day and create a time series plot to display this information clearly.</p>
 <p>Steps to Accomplish the Challenge:</p>
 <ul>
@@ -8635,6 +10188,46 @@ Enable grid lines for better readability and display the plot.</li>
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Convert the 'timestamp' column to datetime</span>
+<span class="n">filtered_data</span><span class="p">[</span><span class="s1">'tpep_pickup_datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">'tpep_pickup_datetime'</span><span class="p">])</span>
+
+<span class="c1"># Extract the date from the timestamp</span>
+<span class="n">filtered_data</span><span class="p">[</span><span class="s1">'date_pickup'</span><span class="p">]</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">'tpep_pickup_datetime'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span>
+
+<span class="n">average_daily_stats</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'date_pickup'</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">number_trips</span><span class="o">=</span><span class="p">(</span><span class="s1">'tip_amount'</span><span class="p">,</span> <span class="s1">'count'</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+
+
+<span class="c1"># Plot a line chart for the time series</span>
+<span class="n">average_daily_stats</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'date_pickup'</span><span class="p">)[</span><span class="s1">'number_trips'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Time Series Plot for January 2024'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Date'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Trips'</span><span class="p">)</span>
+<span class="c1"># Set the x-axis limit to show a specific date range</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2024-01-01'</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2024-01-31'</span><span class="p">))</span>  <span class="c1"># Adjust dates as needed</span>
+<span class="c1"># Rotate x-axis labels to 90 degrees</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -8642,7 +10235,7 @@ Enable grid lines for better readability and display the plot.</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Bar-Plot-for-Categorical-Data">Bar Plot for Categorical Data<a class="anchor-link" href="#Bar-Plot-for-Categorical-Data">¶</a></h4><p>Bar plot charts are particularly useful in the following scenarios:</p>
+<h3 id="Bar-Plot-for-Categorical-Data">Bar Plot for Categorical Data<a class="anchor-link" href="#Bar-Plot-for-Categorical-Data">¶</a></h3><p>Bar plot charts are particularly useful in the following scenarios:</p>
 <ul>
 <li><p><strong>Categorical Data Comparison</strong>: When you need to compare quantities across different categories. Bar plots clearly display the differences in counts or measurements among distinct groups.</p>
 </li>
@@ -8717,7 +10310,7 @@ Enable grid lines for better readability and display the plot.</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="%F0%9F%8F%86-Bar-Chart-Challenge">🏆 Bar Chart Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Bar-Chart-Challenge">¶</a></h4><p><strong>Analyzing Taxi Trip Volume by Vendor</strong></p>
+<h3 id="%F0%9F%8F%86-Bar-Chart-Challenge">🏆 Bar Chart Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Bar-Chart-Challenge">¶</a></h3><p><strong>Analyzing Taxi Trip Volume by Vendor</strong></p>
 <p>The objective of this challenge is to analyze and visualize the volume of taxi trips per vendor using the provided dataset from the Filtering and Selecting Data Challenge. You will count the number of trips associated with each vendor and create a bar chart to display this information clearly.</p>
 <p>Steps to Accomplish the Challenge:</p>
 <ul>
@@ -8734,6 +10327,44 @@ Enable grid lines for better readability and display the plot.</li>
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Count occurrences of each category</span>
+<span class="n">category_counts</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">'VendorID'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="c1"># Plot a bar chart for the counts of each category</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>  <span class="c1"># Set the figure size</span>
+<span class="n">category_counts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'lightgrey'</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Trips per vendor'</span><span class="p">)</span>
+
+<span class="c1"># Adding labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Vendor ID'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Trips'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels for better readability</span>
+
+<span class="c1"># Adding a grid for easier reading</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'y'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Display the value on top of each bar</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">category_counts</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">value</span> <span class="o">/</span> <span class="mi">1_000</span><span class="p">))</span><span class="o">+</span><span class="s1">' thousands'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'bottom'</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># Adjust layout for better spacing</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -8741,7 +10372,7 @@ Enable grid lines for better readability and display the plot.</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Scatter-Plot-for-Numerical-Relationships">Scatter Plot for Numerical Relationships<a class="anchor-link" href="#Scatter-Plot-for-Numerical-Relationships">¶</a></h4><p>Scatter plots are useful in the following scenarios:</p>
+<h3 id="Scatter-Plot-for-Numerical-Relationships">Scatter Plot for Numerical Relationships<a class="anchor-link" href="#Scatter-Plot-for-Numerical-Relationships">¶</a></h3><p>Scatter plots are useful in the following scenarios:</p>
 <ul>
 <li><p><strong>Relationship Between Two Variables</strong>: When you want to explore the relationship or correlation between two numerical variables. Scatter plots can reveal whether a positive, negative, or no correlation exists.</p>
 </li>
@@ -8819,7 +10450,7 @@ Enable grid lines for better readability and display the plot.</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="%F0%9F%8F%86-Scatterplot-Chart-Challenge">🏆 Scatterplot Chart Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Scatterplot-Chart-Challenge">¶</a></h4><p><strong>Analyzing Trip Data Relationships</strong></p>
+<h3 id="%F0%9F%8F%86-Scatterplot-Chart-Challenge">🏆 Scatterplot Chart Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Scatterplot-Chart-Challenge">¶</a></h3><p><strong>Analyzing Trip Data Relationships</strong></p>
 <p>The goal of this challenge is to analyze the relationship between the total amount charged for taxi trips and the distance traveled. This involves cleaning the dataset by removing outliers and correcting data issues, followed by visualizing the results with a scatter plot and a regression line.</p>
 <p>High-Level Steps:</p>
 <ul>
@@ -8848,6 +10479,59 @@ Display the final plot with proper layout adjustments for optimal viewing.</p>
 </li>
 </ul>
 <p>This challenge will help you practice data cleaning, visualization techniques, and regression analysis using Python and its libraries.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1">#We identify some outliers and data issues that we need to correct:</span>
+
+<span class="c1">#There are some outlier trips with trip_distances of thousands of kilometers</span>
+<span class="n">filtered_data</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[(</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">'trip_distance'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)]</span>
+<span class="c1">#There are also trips with negative value in total_amount</span>
+<span class="n">filtered_data</span><span class="p">[</span><span class="s1">'total_amount'</span><span class="p">]</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">'total_amount'</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+
+
+<span class="c1"># Create a scatter plot to see relationships between two numerical columns</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>  <span class="c1"># Set the figure size</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">'total_amount'</span><span class="p">],</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">'trip_distance'</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Adding titles and labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Scatter Plot of Total amount vs Trip distance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Total amount'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Trip distance'</span><span class="p">)</span>
+
+<span class="c1"># Adding a grid for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Calculate linear regression</span>
+<span class="n">m</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">'total_amount'</span><span class="p">],</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">'trip_distance'</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Create a range of x values for the regression line</span>
+<span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">'total_amount'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">'total_amount'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Calculate the corresponding y values for the regression line</span>
+<span class="n">y_values</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x_values</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># Plot the regression line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># Adjust layout for better spacing</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -8941,7 +10625,8 @@ Display the final plot with proper layout adjustments for optimal viewing.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Squaring-Values-in-a-Numerical-Column">Squaring Values in a Numerical Column<a class="anchor-link" href="#Squaring-Values-in-a-Numerical-Column">¶</a></h4><p>Use Case: This transformation could be used in a scenario where you want to create polynomial features for a regression model.</p>
+<p><strong>1. Squaring Values in a Numerical Column</strong></p>
+<p>Use Case: This transformation could be used in a scenario where you want to create polynomial features for a regression model.</p>
 </div>
 </div>
 </div>
@@ -8976,7 +10661,8 @@ Display the final plot with proper layout adjustments for optimal viewing.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Converting-Units">Converting Units<a class="anchor-link" href="#Converting-Units">¶</a></h4><p>Use Case: This is useful in scenarios where temperature data needs to be standardized to a specific unit for analysis or visualization.</p>
+<p><strong>2. Converting Units</strong></p>
+<p>Use Case: This is useful in scenarios where temperature data needs to be standardized to a specific unit for analysis or visualization.</p>
 </div>
 </div>
 </div>
@@ -9013,7 +10699,8 @@ Display the final plot with proper layout adjustments for optimal viewing.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Text-Processing">Text Processing<a class="anchor-link" href="#Text-Processing">¶</a></h4><p>Use Case: This can be particularly useful in data cleaning, where inconsistent capitalization in text data needs to be standardized before further analysis or reporting.</p>
+<p><strong>3. Text Processing</strong></p>
+<p>Use Case: This can be particularly useful in data cleaning, where inconsistent capitalization in text data needs to be standardized before further analysis or reporting.</p>
 </div>
 </div>
 </div>
@@ -9047,7 +10734,8 @@ Display the final plot with proper layout adjustments for optimal viewing.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Conditional-Transformations">Conditional Transformations<a class="anchor-link" href="#Conditional-Transformations">¶</a></h4><p>Use Case: This transformation can help categorize numerical values into discrete categories, which is useful for summarizing performance metrics.</p>
+<p><strong>4. Conditional Transformations</strong></p>
+<p>Use Case: This transformation can help categorize numerical values into discrete categories, which is useful for summarizing performance metrics.</p>
 </div>
 </div>
 </div>
@@ -9081,7 +10769,8 @@ Display the final plot with proper layout adjustments for optimal viewing.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Date-Manipulation">Date Manipulation<a class="anchor-link" href="#Date-Manipulation">¶</a></h4><p>Use Case: Extracting specific date components is crucial for time series analysis and allows for grouping or filtering by time periods.</p>
+<p><strong>5. Date Manipulation</strong></p>
+<p>Use Case: Extracting specific date components is crucial for time series analysis and allows for grouping or filtering by time periods.</p>
 </div>
 </div>
 </div>
