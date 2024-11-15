@@ -3,7 +3,34 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>06 - APIs and JSON</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>07 - Databases and SQL</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script>
+(function() {
+  function addWidgetsRenderer() {
+    var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
+    var scriptElement = document.createElement('script');
+    
+    var widgetRendererSrc = 'https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js';
+    
+    var widgetState;
+
+    // Fallback for older version:
+    try {
+      widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
+
+      if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
+        
+        var widgetRendererSrc = 'https://unpkg.com/@jupyter-js-widgets@*/dist/embed.js';
+        
+      }
+    } catch(e) {}
+
+    scriptElement.src = widgetRendererSrc;
+    document.body.appendChild(scriptElement);
+  }
+
+  document.addEventListener('DOMContentLoaded', addWidgetsRenderer);
+}());
+</script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7516,10 +7543,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="APIs">APIs<a class="anchor-link" href="#APIs">¶</a></h1><p>APIs (Application Programming Interfaces) play a crucial role in Python programming by enabling developers to interact with external services and data sources.</p>
-<p>Through APIs, Python applications can request and manipulate data from various platforms, such as social media, financial services, and cloud storage, enhancing functionality without needing to build everything from scratch.</p>
-<p>Python’s simplicity and the availability of libraries like <code>requests</code> and <code>flask</code> make it easy to consume <strong>RESTful APIs</strong> or build your own.</p>
-<p>In the following sections, we will explore how networks function and gain a clearer understanding of the HTTP messages used in API calls.</p>
+<h1 id="Databases">Databases<a class="anchor-link" href="#Databases">¶</a></h1><p>Databases allow you to <strong>store data</strong> persistently. This means your data remains available even after your application shuts down.</p>
 </div>
 </div>
 </div>
@@ -7530,368 +7554,417 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Data-Transfer-%F0%9F%9A%80">Data Transfer 🚀<a class="anchor-link" href="#Data-Transfer-%F0%9F%9A%80">¶</a></h2><p>When communicating between computers, data must traverse several intermediary points in the network. 🖥️➡️🖥️ This can include devices like routers and modems, which facilitate the exchange of information between the two machines.</p>
-<p>The data we want to send undergoes several transformations before reaching its destination, starting from our code. This is where layers of abstraction come into play, representing the same data in different ways. Let's explore these layers:</p>
+<h2 id="Types-of-databases">Types of databases<a class="anchor-link" href="#Types-of-databases">¶</a></h2><ul>
+<li><p><strong>Relational</strong> Databases (RDBMS): Store data in structured tables with rows and columns, using SQL for data manipulation (e.g.,<a href="https://www.mysql.com/">MySQL</a>, <a href="https://www.postgresql.org/">PostgreSQL</a>, <a href="https://www.sqlite.org/index.html">SQLite</a>).</p>
+</li>
+<li><p><strong>NoSQL</strong> Databases: Designed for unstructured or semi-structured data, offering flexibility for scalability and various data models (e.g., <a href="https://www.mongodb.com/es">MongoDB</a>, <a href="https://cassandra.apache.org/_/index.html">Cassandra</a>).</p>
+</li>
+<li><p><strong>Vector</strong> Databases: Vector databases are specialized systems designed to store, index, and search high-dimensional vector data. They are particularly useful in applications that involve machine learning, artificial intelligence, and natural language processing (NLP)
+(e.g., <a href="https://www.pinecone.io/">Pinecone</a>, <a href="https://vespa.ai/">Vespa</a>)</p>
+</li>
+<li><p><strong>Graph</strong> Databases: Use graph structures with nodes, edges, and properties to represent and store relationships between data points (e.g., <a href="https://neo4j.com/">Neo4j</a>, <a href="https://arangodb.com/">ArangoDB</a>).</p>
+</li>
+<li><p><strong>Document-Oriented</strong> Databases: Store data in flexible, hierarchical formats such as JSON or BSON, ideal for semi-structured data (e.g., <a href="https://www.mongodb.com/">MongoDB</a>, <a href="https://couchdb.apache.org/">CouchDB</a>.</p>
+</li>
+<li><p><strong>Columnar</strong> Databases: Store data in columns rather than rows, optimizing read-heavy workloads, typically used for analytics (e.g., <a href="https://www.exasol.com/">Exasol</a>, <a href="https://clickhouse.com/">Clickhouse</a>, <a href="https://aws.amazon.com/redshift">Amazon Redshift</a>, <a href="https://cloud.google.com/bigquery">Google Big Query</a>, <a href="https://duckdb.org/">DuckDB</a>).</p>
+</li>
+<li><p><strong>Time-Series</strong> Databases: Specialize in handling time-stamped data, often used for monitoring and IoT applications (e.g., <a href="https://www.influxdata.com/">InfluxDB</a>).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Characteristics-of-Relational-databases">Characteristics of Relational databases<a class="anchor-link" href="#Characteristics-of-Relational-databases">¶</a></h2><ul>
+<li><p>In relational databases we can perform complex searches and data manipulations with <strong>SQL</strong> (Structured Query Language).</p>
+</li>
+<li><p><strong>ACID</strong> transactions are a set of properties that guarantee the reliable processing of database transactions. These properties are crucial for ensuring that database systems handle data in a consistent, reliable, and fault-tolerant manner, especially in environments that require strict data integrity</p>
+<ul>
+<li><p>Atomicity: Either the entire transaction is completed successfully, or none of it is applied (it is rolled back).</p>
+</li>
+<li><p>Consistency: The database must transition from one valid state to another, maintaining all predefined rules, constraints, and relationships.</p>
+</li>
+<li><p>Isolation: Multiple transactions running at the same time do not interfere with each other. This often involves using locks to prevent one transaction from reading data that is being modified by another until the changes are committed.</p>
+</li>
+<li><p>Durability: Once a transaction is committed, it will be permanently recorded, and the changes will persist even in the event of a system failure.</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Connecting-Python-to-SQLite">Connecting Python to SQLite<a class="anchor-link" href="#Connecting-Python-to-SQLite">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a href="https://www.sqlite.org/index.html">SQLite</a> is a lightweight, serverless database engine that requires no configuration or external setup.</p>
+<p>To get started, let's create a database and a table.</p>
+<p>In your Google Colab notebook, first import the <code>sqlite3</code> module, then establish a connection to the database.</p>
+<p>For this example, we'll use an in-memory database, which is denoted by <code>:memory:</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">':memory:'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Once the connection to the database is established, we can create a table.</p>
+<p>For this example, let's create a table called transactions with five columns: date, id, from_account, to_account, currency, and amount.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Execute a SQL command to create a new table</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="c1"># Define the SQL command to create the table</span>
+
+<span class="n">create_table_query</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">CREATE TABLE transactions (</span>
+<span class="s2">    date TEXT,</span>
+<span class="s2">    id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s2">    from_account TEXT,</span>
+<span class="s2">    to_account TEXT,</span>
+<span class="s2">    currency TEXT,</span>
+<span class="s2">    amount REAL</span>
+<span class="s2">)</span>
+<span class="s2">"""</span>
+<span class="c1"># Execute the SQL command</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">create_table_query</span><span class="p">)</span>
+
+<span class="c1"># Commit the changes to the database</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># Close the connection (optional but good practice)</span>
+<span class="c1"># conn.close()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can insert data into our transactions table using standard SQL <code>INSERT</code> syntax.</p>
+<p>Then, we <code>commit</code> the transaction to save changes to the database.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Define the data to insert</span>
+<span class="n">transactions_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">'2024-11-15'</span><span class="p">,</span> <span class="s1">'AccountA'</span><span class="p">,</span> <span class="s1">'AccountB'</span><span class="p">,</span> <span class="s1">'USD'</span><span class="p">,</span> <span class="mf">100.00</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'2024-11-16'</span><span class="p">,</span> <span class="s1">'AccountC'</span><span class="p">,</span> <span class="s1">'AccountA'</span><span class="p">,</span> <span class="s1">'EUR'</span><span class="p">,</span> <span class="mf">50.50</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'2024-11-17'</span><span class="p">,</span> <span class="s1">'AccountB'</span><span class="p">,</span> <span class="s1">'AccountD'</span><span class="p">,</span> <span class="s1">'GBP'</span><span class="p">,</span> <span class="mf">75.25</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="c1"># Create a cursor object to execute SQL commands</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="c1"># Define the SQL command to insert data</span>
+<span class="n">insert_query</span> <span class="o">=</span> <span class="s2">"INSERT INTO transactions (date, from_account, to_account, currency, amount) VALUES (?, ?, ?, ?, ?)"</span>
+
+<span class="c1"># Execute the SQL command for each transaction</span>
+<span class="k">for</span> <span class="n">transaction</span> <span class="ow">in</span> <span class="n">transactions_data</span><span class="p">:</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert_query</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+
+<span class="c1"># Commit the changes to the database</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now that we have a populated database, we can start running SQL queries on it. Let's select all <code>BUY</code> transactions from our stocks table and print the output by fetching all the results from the execution.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Define the SQL SELECT query</span>
+<span class="n">select_query</span> <span class="o">=</span> <span class="s2">"SELECT * FROM transactions"</span>  <span class="c1"># Select all columns and rows</span>
+
+<span class="c1"># Execute the query</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">select_query</span><span class="p">)</span>
+
+<span class="c1"># Fetch all results</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+<span class="c1"># Print the results</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Magic commands are a feature of IPython that provides a set of commands to solve common problems while working with data. The SQL magic command is one such command that lets you write SQL queries in your notebook.</p>
+<p>First, we need to install the ipython-sql extension. This can be done directly in a Colab cell:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Install ipython-sql</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">ipython</span><span class="o">-</span><span class="n">sql</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Next, load the SQL extension and create a SQLite database:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Load the SQL extension</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">sql</span>
+
+<span class="c1"># Create a SQLite database</span>
+<span class="o">%</span><span class="n">sql</span> <span class="n">sqlite</span><span class="p">:</span><span class="o">///</span><span class="p">:</span><span class="n">memory</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now you can write SQL queries using the <code>%sql</code> or <code>%%sql</code> magic command.</p>
+<p>% is for single-line commands, and %% is for multi-line commands that run the whole cell as SQL.</p>
+<p>Here's an example of executing SQL commands to create a table, insert data, and run a query using %%sql.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="o">%%</span><span class="n">sql</span>
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">transactions2</span> <span class="p">(</span>
+    <span class="n">date</span> <span class="n">TEXT</span><span class="p">,</span>
+    <span class="nb">id</span> <span class="n">INTEGER</span> <span class="n">PRIMARY</span> <span class="n">KEY</span> <span class="n">AUTOINCREMENT</span><span class="p">,</span>
+    <span class="n">from_account</span> <span class="n">TEXT</span><span class="p">,</span>
+    <span class="n">to_account</span> <span class="n">TEXT</span><span class="p">,</span>
+    <span class="n">currency</span> <span class="n">TEXT</span><span class="p">,</span>
+    <span class="n">amount</span> <span class="n">REAL</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Connecting-Python-to-DuckDB-">Connecting Python to DuckDB <img alt="DuckDB" src="https://duckdb.org/images/logo-dl/DuckDB_Logo-horizontal.svg"/><a class="anchor-link" href="#Connecting-Python-to-DuckDB-">¶</a></h2><p>DuckDB is a in-process SQL database for analytical workloads that stores the data in columns.</p>
+<ul>
+<li><strong>Simple</strong>: SQLite is the <a href="https://www.sqlite.org/mostdeployed.html">most widely deployed DBMS</a>, and DuckDB embraces its simplicity and embedded operation.</li>
+<li><strong>Portable</strong>: There’s no separate DBMS server to install or maintain; DuckDB runs embedded within the host process for faster data transfer.</li>
+<li><strong>Optimized for Analytics</strong>: DuckDB is designed for OLAP workloads, enabling efficient processing of complex queries and large datasets.</li>
+<li><strong>Free</strong>: DuckDB is open-source, the entire source code is freely available on GitHub.</li>
+</ul>
+<p>Let's use it with Python</p>
+<p>First we need to make sure we are using the latest version.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Installation</strong>
+We need to make sure we are using the latest version of DuckDB.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">uninstall</span> <span class="n">duckdb</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">duckdb</span> <span class="o">--</span><span class="n">pre</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Import</strong> the DuckDB library with <code>import duckdb</code>, making its functions and classes available for use in your Python script.</p>
+<p><strong>Establish a connection</strong> to a DuckDB database. The <code>connect()</code> function creates an in-memory database by default, which means you can start running SQL queries right away without needing to set up any external database server.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">duckdb</span>
+
+<span class="n">con</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Reading the data</strong></p>
+<p>For the class we are going to be using a couple of datasets from internet.</p>
 <ol>
-<li><strong>Physical Layer</strong> (Low Level) 🔌</li>
+<li><p><a href="https://www.kaggle.com/datasets/ecboxer/nyc-weather">Weather in NYC</a> (380 KB)</p>
+</li>
+<li><p>Yellow Tripdata from <a href="https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC.gov</a> (45 MB)</p>
+</li>
 </ol>
-<p>In this layer, data is represented as ones and zeros in binary format. It is the foundation of all digital communication.</p>
-<ol start="2">
-<li><strong>Network/Transport Layer</strong> (Medium Level) 📦</li>
-</ol>
-<p>Here, data is grouped into packets. The ones and zeros from the lower layers are organized according to predefined rules to form these packets. A key protocol in this layer is TCP/IP (Transmission Control Protocol/Internet Protocol), which establishes the rules for how packets are transmitted between computers. The router is the hero of this layer! 🦸‍♂️</p>
-<ol start="3">
-<li><strong>Application Layer</strong> (High Level) 📊</li>
-</ol>
-<p>In the highest layer of abstraction, data is simply that: data. Here, it resembles variables in a programming language like Python. Some communication protocols operating at this level include HTTP (Hypertext Transfer Protocol). Many services we use daily, such as email and the World Wide Web (www), function at this layer. 🌐✉️</p>
-<p>Understanding these layers will help us develop more effective applications and optimize data transfer in our Python projects. Let’s dive into the code! 🐍💻</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Understanding-IP-Addresses-%F0%9F%8C%90">Understanding IP Addresses 🌐<a class="anchor-link" href="#Understanding-IP-Addresses-%F0%9F%8C%90">¶</a></h2><p>An IP address is a unique identifier for a computer on the Internet, such as 56.12.32.01. However, when we analyze the numbers more closely, we realize there aren’t as many possibilities as there are Internet users worldwide. So, how many possibilities are there? And how does the IP system work?</p>
-<p>Let's break it down with some calculations!</p>
-<p>Each segment of an IPv4 address can range from 0 to 255, giving us 256 options per segment.
-Since there are 4 segments in an IP address (like A.B.C.D), the total number of possible IP addresses is $256 \times 4$ , which equals 4,294,967,296 addresses.</p>
-<ul>
-<li>Current population in the world:  8,147,701,969</li>
-<li>Available IP Addresses:           4,294,967,296</li>
-</ul>
-<p>Despite the vast number of possible IP addresses, the world population continues to grow, and so does Internet usage. This raises questions about how we manage these addresses, especially with the advent of IPv6, which expands our possibilities significantly</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Public-and-Private-IP-Addresses-%F0%9F%8C%8D%F0%9F%94%92">Public and Private IP Addresses 🌍🔒<a class="anchor-link" href="#Public-and-Private-IP-Addresses-%F0%9F%8C%8D%F0%9F%94%92">¶</a></h3><p>In a simplified scenario, we can identify many "local networks" within the vast expanse of the Internet. For instance, consider a network where 10 computers (or devices) connect to a router. In these local networks, the router is responsible for assigning private IP addresses to each device.</p>
-<p><strong>How It Works:</strong></p>
-<ul>
-<li><p><strong>Private IP Addresses</strong>: These addresses are unique only within the local network. This means that the same private IP address can be used in different local networks without conflict. Common ranges for private IP addresses include:</p>
-<ul>
-<li>10.0.0.0 to 10.255.255.255</li>
-<li>172.16.0.0 to 172.31.255.255</li>
-<li>192.168.0.0 to 192.168.255.255</li>
-</ul>
-</li>
-<li><p><strong>Public IP Address</strong>: The router has a single public IP address that communicates with the rest of the Internet. This public address is unique across the entire Internet and is how the network is identified externally.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="How-Routers-Manage-Connections">How Routers Manage Connections<a class="anchor-link" href="#How-Routers-Manage-Connections">¶</a></h3><p>The router maintains a "table" of addresses to direct all the packets that pass through it. This is crucial for ensuring that data reaches the correct destination within local and external networks.</p>
-<p><strong>The Challenge of Multiple Programs</strong></p>
-<p>However, there’s still a challenge: what happens if two programs on the same computer want to communicate with the same external IP address? How does the router and the computer know which packets belong to which program?</p>
-<p>Solution: Sockets</p>
-<p>A socket is an endpoint for sending and receiving data across a network. It is defined by an IP address and a port number.</p>
-<ul>
-<li><p>Port Numbers:</p>
-<p>Each program (or service) on a computer uses a unique port number to distinguish its communication.
-For instance, when a web browser and an email client both connect to the same external IP, they will each use different port numbers (e.g., 80 for HTTP and 25 for SMTP).
-This way, the router can identify which packets belong to which application based on the combination of the IP address and the port number.</p>
-</li>
-<li><p>Network Address Translation (NAT):</p>
-<p>NAT is the technology that allows multiple devices on a local network to share a single public IP address.
-When data packets are sent from the computer to the router, the router changes the source IP address to its own public IP and assigns a unique port number for each outgoing connection.
-When responses come back, the router uses its table to match the incoming packets to the correct internal IP and port number, ensuring that they are forwarded to the correct program.</p>
-</li>
-</ul>
-<p>To learn more about socket programming in Python
-<a href="https://docs.python.org/3.13/howto/sockets.html">https://docs.python.org/3.13/howto/sockets.html</a>
-<a href="https://docs.python.org/3/library/socket.html">https://docs.python.org/3/library/socket.html</a></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Client-Server-Communication-Model">Client-Server Communication Model<a class="anchor-link" href="#Client-Server-Communication-Model">¶</a></h3><p>Many data communications follow a client-server model, where two computers take on distinct roles: one acts as the server and the other as the client.</p>
-<p><strong>Roles Explained:</strong></p>
-<ul>
-<li><p>Server:</p>
-<p>The server is responsible for storing and providing the data that the client requests.
-It "listens" for incoming requests, waiting for clients to connect.
-Once a request is received, the server processes it and sends the appropriate data back to the client.</p>
-</li>
-<li><p>Client:</p>
-<p>The client is the entity that initiates communication with the server.
-Typically, this is the program or device used by a user, like a web browser or email client.
-After establishing a connection, the client can make various requests for data, such as fetching a web page or sending an email. The communication continues until the client decides to close the connection.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="HTTP">HTTP<a class="anchor-link" href="#HTTP">¶</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="HTTP-Protocol">HTTP Protocol<a class="anchor-link" href="#HTTP-Protocol">¶</a></h3><p>The HTTP (Hypertext Transfer Protocol) is one of the primary ways applications communicate at the highest level of abstraction. While there are many other communication protocols at this level, such as FTP, SMTP, and SSH, we'll focus on HTTP since it's one of the most widely used and forms the foundation for all data communication on the web.</p>
-<p><strong>Key Features of HTTP:</strong></p>
-<ul>
-<li><p>High-Level Communication:</p>
-<ul>
-<li>From a programming perspective, HTTP simplifies the creation and communication of the "packets" we've discussed earlier.</li>
-<li>It typically operates over the TCP/IP protocol, allowing developers to focus on building applications without worrying about low-level details.</li>
-</ul>
-</li>
-<li><p>Client-Server Model:</p>
-<ul>
-<li>Similar to sockets, HTTP also follows the client-server model.</li>
-<li>The client sends requests to the server, which then returns a response.</li>
-<li>The data exchanged usually includes hypertext documents, images, videos, form data, and more.</li>
-</ul>
-</li>
-<li><p>Requests and Responses:</p>
-<ul>
-<li>A typical interaction involves the client making a request (e.g., requesting a webpage), and the server responding with the requested data.</li>
-<li>Each HTTP request and response consists of a header (providing metadata) and a body (containing the actual data).</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="HTTP-Messages">HTTP Messages<a class="anchor-link" href="#HTTP-Messages">¶</a></h2><p>There are two basic types of HTTP messages, depending on which agent of the system sent them (client or server).</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="HTTP-Request">HTTP Request<a class="anchor-link" href="#HTTP-Request">¶</a></h3><p>The messages sent by the client are called requests, and they consist of multiple elements.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="HTTP-Methods">HTTP Methods<a class="anchor-link" href="#HTTP-Methods">¶</a></h4><p>The protocol defines several methods that specify the action the client wants to perform. While there are multiple methods, the most commonly used are GET, POST, PUT, and DELETE:</p>
-<ul>
-<li><p>GET: Used when the client wants to retrieve data from the server, such as getting a list of all students in a course.</p>
-</li>
-<li><p>POST: Used when the client wants to send new data to the server, like submitting a form to add a new student to the course.</p>
-</li>
-<li><p>PUT: Used when the client wants to modify existing data on the server, such as changing a student's name.</p>
-</li>
-<li><p>DELETE: Used when the client wants to remove data from the server, like deleting a student from the course.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="URL-and-Path">URL and Path<a class="anchor-link" href="#URL-and-Path">¶</a></h4><p>The request must specify the path of the resource the client wants to interact with. This path does not include some elements that the server can infer from context, but it's important to understand the entire structure that makes up the URL (Uniform Resource Locator):</p>
-<ul>
-<li><p>Protocol: Typically seen as "http://", indicating the protocol being used.</p>
-</li>
-<li><p>Domain or Host: For example, "developer.mozilla.org". This indicates the domain name, which is resolved to the corresponding server IP.</p>
-</li>
-<li><p>Port: As mentioned earlier, the port, like the IP address, is important for locating the specific server. For web traffic, the default port is 80, which usually doesn't appear in the URL because it’s assumed.</p>
-</li>
-</ul>
-<p>Combining these elements gives us the URL that we typically see in browsers:</p>
-<pre><code>http://developer.mozilla.org/
-</code></pre>
-<p>Parameters can also be added to the URL after the resource in a key-value format separated by &amp;. For example:</p>
-<pre><code>http://developer.mozilla.org?key1=value1&amp;key2=value2
-</code></pre>
-<p>These parameters can be thought of as arguments passed to a function in Python, as if the function were hosted on the server, which is common in a GET request.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Headers-and-Body">Headers and Body<a class="anchor-link" href="#Headers-and-Body">¶</a></h4><p>A request also includes a series of headers that can provide additional information to the server, such as authentication details. Additionally, there may be a body in the request, used to send required information to the server, like form data in a POST request.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="HTTP-Response">HTTP Response<a class="anchor-link" href="#HTTP-Response">¶</a></h3><p>Messages sent by the server are called responses, and they consist of multiple elements.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Status-Code">Status Code<a class="anchor-link" href="#Status-Code">¶</a></h4><p>In the response, the server sends a status code (along with a message) that indicates the result of the client's request—whether it was successful or encountered an error. There are many status codes defined by the HTTP protocol, but the most commonly known are:</p>
-<ul>
-<li>200 OK: Indicates that the request was successful.</li>
-<li>404 Not Found: Indicates that the requested resource could not be found.
-For a deeper dive into the various status codes, you can check out this comprehensive list: HTTP Status Codes. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Headers-and-Body">Headers and Body<a class="anchor-link" href="#Headers-and-Body">¶</a></h4><p>Similar to requests, the response also includes headers that serve the same purpose—providing additional metadata about the response.</p>
-<p>The body of the response, on the other hand, contains the resource and data that the client requested from the server. This could be HTML content, JSON data, images, or any other type of resource.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Making-Requests-in-Python">Making Requests in Python<a class="anchor-link" href="#Making-Requests-in-Python">¶</a></h2><p>When it comes to making HTTP requests in Python, you can use python libraries such as <a href="https://docs.python-requests.org/en/latest/index.html"><code>requests</code></a>.</p>
-<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-</pre></div>
-<p>We can make any HTTP request simply by using the corresponding method from the requests library.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="A-GET-request">A GET request<a class="anchor-link" href="#A-GET-request">¶</a></h3><p>GET requests are a fundamental part of web communication. They are used to retrieve data from a specified resource, such as a web server or an API endpoint.</p>
-<p>In Python, you can easily perform GET requests using the <code>requests</code> library.</p>
-<p><strong>What is a GET Request?</strong></p>
-<ul>
-<li><strong>Purpose</strong>: A GET request is used to request data from a specified resource. The data is usually returned in a format like JSON or HTML.</li>
-<li><strong>Idempotent</strong>: GET requests are idempotent, meaning that making the same request multiple times will not change the state of the server.</li>
-<li><strong>Parameters</strong>: You can pass parameters in the URL, which can be used to filter or specify the data you want.</li>
-</ul>
-<p>For example, we can use the requests library to make a GET request to a specified URL.</p>
-<p>Checking the response status code is important to determine whether the request was successful (<code>200</code>), if the resource was not found (<code>404</code>), or if there was another type of error.</p>
-<p>In the next example, the response content is printed if the request is successful, allowing you to see the data returned by the server.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="c1"># Making a GET request</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://developer.mozilla.org'</span><span class="p">)</span>
-
-<span class="c1"># Checking the status code</span>
-<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Request was successful!"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>  <span class="c1"># This will print the content of the response</span>
-<span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Resource not found."</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"An error occurred: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="%F0%9F%8F%86-GET-request-challenge">🏆 GET request challenge<a class="anchor-link" href="#%F0%9F%8F%86-GET-request-challenge">¶</a></h4><p><strong>Fetch Current Cryptocurrency Prices</strong></p>
-<p>Use a GET request to retrieve the current prices of Bitcoin and Ethereum in USD from the CoinGecko API and display the results.</p>
-<p>Instructions</p>
-<ul>
-<li><p>API Endpoint:</p>
-<p>You will be using the CoinGecko API, specifically the endpoint that provides simple price data for cryptocurrencies. The URL to use is:</p>
-<pre><code>https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&amp;vs_currencies=usd
-</code></pre>
-</li>
-</ul>
-<pre><code>- Make a `GET` Request:
-
-  Use the requests library to send a GET request to the specified URL.
-  Store the response in a variable.
-
-- Parse the Response:
-
-  Convert the response data from JSON format into a Python dictionary using the .json() method.
-
-- Display the Prices:
-
-  Extract the prices of Bitcoin and Ethereum from the parsed data.
-  Print the current prices in a user-friendly format.
-
-- Bonus:
-
-  Experiment by adding other cryptocurrencies to the ids parameter in the URL (e.g., "litecoin,cardano") and display their prices as well.
-</code></pre>
+<blockquote>
+<p>A <strong>Parquet</strong> file is a type of data file designed for storing large amounts of data in a way that's efficient for processing and storage. It's like a smart container that organizes data in columns rather than rows, which helps with faster reading and better compression.
+This makes it great for big data applications where you need to analyze and retrieve data quickly.</p>
+</blockquote>
+<blockquote>
+<p>The <code>!wget</code> command in Google Colab is used to download files from the internet directly into your Colab environment.</p>
+</blockquote>
 </div>
 </div>
 </div>
@@ -7903,12 +7976,8 @@ For a deeper dive into the various status codes, you can check out this comprehe
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&amp;vs_currencies=usd"</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Crypto Prices:"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<div class="highlight hl-python"><pre><span></span><span class="err">!</span><span class="n">wget</span> <span class="s2">"https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2016-01.parquet"</span>
+<span class="err">!</span><span class="n">wget</span> <span class="s2">"https://pdet.github.io/assets/data/weather.csv"</span>
 </pre></div>
 </div>
 </div>
@@ -7921,59 +7990,10 @@ For a deeper dive into the various status codes, you can check out this comprehe
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="A-POST-request">A POST request<a class="anchor-link" href="#A-POST-request">¶</a></h3><p>For POST and PUT methods, the request generally needs to be accompanied by the data we want to modify on the server.</p>
-<p>For that, there is the <code>data</code> argument, which allows us to pass the data in the form of a Python dictionary.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="c1"># You can also send data using a POST request</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'key1'</span><span class="p">:</span> <span class="s1">'value1'</span><span class="p">,</span> <span class="s1">'key2'</span><span class="p">:</span> <span class="s1">'value2'</span><span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'http://example.com/api'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
-<span class="c1"># Checking the response from the POST request</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Response from POST request:"</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="%F0%9F%8F%86-POST-request-challenge">🏆 POST request challenge<a class="anchor-link" href="#%F0%9F%8F%86-POST-request-challenge">¶</a></h4><p><strong>Creating a New Post with a POST Request</strong></p>
-<ul>
-<li><p>Goal</p>
-<p>Your task is to use a POST request to create a new post in a mock blogging platform using the JSONPlaceholder API. This exercise will help you understand how to send data to a server and handle the server's response.</p>
-</li>
-<li><p>Background</p>
-<p>In web development, POST requests are commonly used to submit data to a server, such as creating a new resource. When you create a new post, you typically send details like the post's title, body, and the user associated with it.</p>
-</li>
-<li><p>Instructions</p>
-<ul>
-<li><p>Set Up Your Environment: Make sure you have Python and the requests library installed. If not, you can install it using pip install requests.</p>
-</li>
-<li><p>Define the API Endpoint: Use the following URL to send your POST request:</p>
-</li>
-</ul>
-<pre><code>https://jsonplaceholder.typicode.com/posts
-</code></pre>
-<ul>
-<li><p>Create Your Data Payload: Construct a Python dictionary that represents the data you want to send. Include the following keys:</p>
-<ul>
-<li>title: A string representing the title of the post.</li>
-<li>body: A string containing the content of the post.</li>
-<li>userId: An integer representing the ID of the user creating the post (use 1 for this exercise).</li>
-</ul>
-</li>
-<li><p>Send the POST Request: Use the <code>requests.post()</code> method to send your data to the API endpoint. Pass your data as a JSON object.</p>
-</li>
-<li><p>Handle the Response: Print the HTTP status code and the response body to see the result of your POST request. The response should contain the newly created post with an ID assigned by the server.</p>
-</li>
-</ul>
-</li>
-</ul>
+<p>Now we are going to explore the <a href="https://duckdb.org/docs/api/python/relational_api">Relational API</a> of DuckDB exploring the data in the files.</p>
+<p>The relations can be seen as symbolic representations of SQL queries. They do not hold any data – and nothing is executed – until a method that triggers execution is called.</p>
+<p>We can construct relation objects of external data using a especific function according to the type of datasource like <code>from_arrow</code>, <code>from_df</code>, <code>read_csv</code>, <code>read_json</code>, <code>read_parquet</code>.</p>
+<p>More info about <a href="https://duckdb.org/docs/api/python/data_ingestion">data ingestion</a></p>
 </div>
 </div>
 </div>
@@ -7985,93 +8005,13 @@ For a deeper dive into the various status codes, you can check out this comprehe
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://jsonplaceholder.typicode.com/posts"</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"New Post"</span><span class="p">,</span>
-    <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"This is the content of the new post Test."</span><span class="p">,</span>
-    <span class="s2">"userId"</span><span class="p">:</span> <span class="mi">1</span>
-<span class="p">}</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Response from post creation:"</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">weather</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'weather.csv'</span><span class="p">)</span>
+<span class="n">weather_df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM weather"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchdf</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">weather</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">weather</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">weather_df</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Parsing-JSON-Documents-in-Python">Parsing JSON Documents in Python<a class="anchor-link" href="#Parsing-JSON-Documents-in-Python">¶</a></h1>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Introduction-to-JSON">Introduction to JSON<a class="anchor-link" href="#Introduction-to-JSON">¶</a></h2><p>JSON (JavaScript Object Notation) is a lightweight data interchange format that is easy to read and write for humans and easy to parse and generate for machines.</p>
-<p>JSON is commonly used for APIs and configuration files due to its simplicity and versatility.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="JSON-library">JSON library<a class="anchor-link" href="#JSON-library">¶</a></h3><p>In Python, the primary library for working with JSON data is the built-in <code>json</code> module. This module provides methods to encode (serialize) and decode (parse) JSON data.</p>
-<p><a href="https://docs.python.org/3/library/json.html">Documentation</a></p>
-<p><strong>Commonly Used Functions in the json Module</strong></p>
-<ul>
-<li><code>json.load()</code>: Parses JSON data from a file or file-like object.</li>
-<li><code>json.loads()</code>: Parses JSON data from a string.</li>
-<li><code>json.dump()</code>: Writes JSON data to a file.</li>
-<li><code>json.dumps()</code>: Serializes Python objects to a JSON-formatted string.</li>
-</ul>
-<p><strong>Main Use Cases</strong></p>
-<ul>
-<li>Fetching Data from APIs: Most APIs return data in JSON format, making it necessary to parse the response.</li>
-<li>Configuration Files: JSON is often used for configuration files due to its readability.</li>
-<li>Data Storage: JSON can be used for lightweight data storage in applications.</li>
-</ul>
-<p>Now we are going to see several example code snippets ilustrating the different use cases.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Deserializing-JSON-from-a-String">Deserializing JSON from a String<a class="anchor-link" href="#Deserializing-JSON-from-a-String">¶</a></h3><p>Deserialization is the reverse process of serialization. When we receive a JSON in the form of a string, we must deserialize it in order to work with it in our code.</p>
-<p>Here's how to parse a JSON string into a Python dictionary using <code>json.loads()</code>.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-
-<span class="c1"># Sample JSON string</span>
-<span class="n">json_string</span> <span class="o">=</span> <span class="s1">'{"name": "Alice", "age": 30, "city": "New York"}'</span>
-
-<span class="c1"># Parse JSON string</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_string</span><span class="p">)</span>
-
-<span class="c1"># Accessing data</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Name:"</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">'name'</span><span class="p">])</span>  <span class="c1"># Output: Name: Alice</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Age:"</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">'age'</span><span class="p">])</span>    <span class="c1"># Output: Age: 30</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"City:"</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">'city'</span><span class="p">])</span>  <span class="c1"># Output: City: New York</span>
-</pre></div>
 </div>
 </div>
 </div>
@@ -8083,33 +8023,9 @@ For a deeper dive into the various status codes, you can check out this comprehe
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">weather_df</span><span class="o">.</span><span class="n">dtypes</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Parsing-JSON-from-a-File">Parsing JSON from a File<a class="anchor-link" href="#Parsing-JSON-from-a-File">¶</a></h3><p>To read JSON data from a file, use <code>json.load()</code>.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-
-<span class="c1"># Assume 'employees.json' contains: {"employees": [{"name": "Alice"}, {"name": "Bob"}]}</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'employees.json'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-
-<span class="c1"># Accessing the list of employees</span>
-<span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">'employees'</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Employee Name:"</span><span class="p">,</span> <span class="n">employee</span><span class="p">[</span><span class="s1">'name'</span><span class="p">])</span>
-
-<span class="c1"># Output: Employee Name: Alice</span>
-<span class="c1">#         Employee Name: Bob</span>
-</pre></div>
 </div>
 </div>
 </div>
@@ -8121,7 +8037,10 @@ For a deeper dive into the various status codes, you can check out this comprehe
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"CREATE OR REPLACE TABLE taxi as SELECT * FROM 'yellow_tripdata_2016-01.parquet'"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">taxi_df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM taxi"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchdf</span><span class="p">()</span>
+<span class="n">taxi_df</span>
+<span class="n">taxi_df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -8134,21 +8053,8 @@ For a deeper dive into the various status codes, you can check out this comprehe
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Serializing-Python-Objects-to-JSON">Serializing Python Objects to JSON<a class="anchor-link" href="#Serializing-Python-Objects-to-JSON">¶</a></h3><p>When we talk about text formats, serialization is the process of converting an object into its string representation. This is often done because the exchange of information, whether over the web or via a cable, is conducted in a serialized format using strings or bytes. The same applies to the JSON format. In Python code, a JSON represents a dictionary, but to transmit it, it must be converted into a string.</p>
-<p>You can convert Python dictionaries or lists into JSON strings using <code>json.dumps()</code>.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-
-<span class="c1"># Sample Python dictionary</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Alice"</span><span class="p">,</span>
-    <span class="s2">"age"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-    <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"New York"</span>
-<span class="p">}</span>
-
-<span class="c1"># Convert to JSON string</span>
-<span class="n">json_string</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"JSON String:"</span><span class="p">,</span> <span class="n">json_string</span><span class="p">)</span> <span class="c1"># Output: JSON String: {"name": "Alice", "age": 30, "city": "New York"}</span>
-</pre></div>
+<p><strong>Querying the data</strong>
+Now we are going to run queries on the tables that we've created.</p>
 </div>
 </div>
 </div>
@@ -8160,7 +8066,13 @@ For a deeper dive into the various status codes, you can check out this comprehe
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">sql</span> <span class="o">=</span> <span class="s1">'''select passenger_count, avg(tip_amount) as tip_amount from taxi group by all'''</span>
+<span class="c1"># Execute with SQL and pandas</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_df</span><span class="p">)</span>
+<span class="c1"># Use a  Dataframe for plotting</span>
+<span class="n">result_df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"passenger_count"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip_amount"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8173,42 +8085,7 @@ For a deeper dive into the various status codes, you can check out this comprehe
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Writing-JSON-to-a-File">Writing JSON to a File<a class="anchor-link" href="#Writing-JSON-to-a-File">¶</a></h3><p>To write JSON data to a file, use <code>json.dump()</code>.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"employees"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Alice"</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Bob"</span><span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-
-<span class="c1"># Write JSON to a file</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'employees.json'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Data written to employees.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="%F0%9F%8F%86-Challenge">🏆 Challenge<a class="anchor-link" href="#%F0%9F%8F%86-Challenge">¶</a></h1><p><strong>Visualize SpaceX Launch Data</strong></p>
-<p>Fetch data about past SpaceX launches and create a timeline visualization of the launch dates and rocket names.</p>
-<p><a href="https://docs.spacexdata.com/">API Documentation</a></p>
-<p><a href="https://github.com/r-spacex/SpaceX-API">GIT Repository</a></p>
-<p>Steps</p>
-<ul>
-<li>Use a GET request to retrieve launch data.</li>
-<li>Parse the JSON response to extract relevant information.</li>
-<li>Visualize the data using a simple plot.</li>
-</ul>
+<p>What is the percentage of times there is no tip given?</p>
 </div>
 </div>
 </div>
@@ -8220,50 +8097,205 @@ For a deeper dive into the various status codes, you can check out this comprehe
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">""" select case when tip_amount = 0 then 'no tip' else 'tip' end as gives_tip</span>
+<span class="s2">                        , avg(tip_amount) as tip_amount</span>
+<span class="s2">                        , count(*) as travels</span>
+<span class="s2">                        from taxi</span>
+<span class="s2">                        group by 1 """</span>
 
-<span class="c1"># Step 1: Fetch SpaceX launch data</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://api.spacexdata.com/v4/launches/past"</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">""" with subquery as (select case when tip_amount = 0 then 'no tip' else 'tip' end as gives_tip</span>
+<span class="s2">                        , avg(tip_amount) as tip_amount</span>
+<span class="s2">                        , count(*) as travels</span>
+<span class="s2">                        from taxi</span>
+<span class="s2">                        group by 1</span>
+<span class="s2">            )</span>
+<span class="s2">            select gives_tip</span>
+<span class="s2">                  , tip_amount as avg_tip_amount</span>
+<span class="s2">                  , travels</span>
+<span class="s2">                  , travels / sum(travels) over() as rate_travels</span>
+<span class="s2">      from subquery</span>
+<span class="s2">      """</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Does the distance of the trip influence the tip amount? How do short trips (less than 5 miles) compare to long trips (greater than 10 miles)?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"CREATE OR REPLACE TABLE taxi_clean as SELECT * FROM 'yellow_tripdata_2016-01.parquet' where passenger_count&gt;0 and passenger_count&lt;=5"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
-<span class="c1"># Check if the request was successful</span>
-<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-    <span class="n">launch_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>  <span class="c1"># Parse JSON response</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Error fetching data:"</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
-    <span class="n">launch_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sql</span> <span class="o">=</span> <span class="s2">""" select passenger_count, count(*) as rides from taxi_clean group by 1"""</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_df</span><span class="p">)</span>
 
-<span class="c1"># Step 2: Extract launch dates and rocket names</span>
-<span class="n">launch_dates</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">rocket_names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sql</span> <span class="o">=</span> <span class="s1">''' select case when trip_distance &lt;5 then 'short'</span>
+<span class="s1">            when trip_distance &lt; 10 then 'medium'</span>
+<span class="s1">            when trip_distance &gt;= 10 then 'high'</span>
+<span class="s1">            end as trip_distance_type</span>
+<span class="s1">          , avg(tip_amount/passenger_count) as avg_tip</span>
+<span class="s1">          , count(*)</span>
+<span class="s1">          from taxi_clean</span>
+<span class="s1">          group by 1'''</span>
 
-<span class="k">for</span> <span class="n">launch</span> <span class="ow">in</span> <span class="n">launch_data</span><span class="p">:</span>
-    <span class="n">launch_dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">launch</span><span class="p">[</span><span class="s1">'date_utc'</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>  <span class="c1"># Convert to datetime</span>
-    <span class="n">rocket_id</span> <span class="o">=</span> <span class="n">launch</span><span class="p">[</span><span class="s1">'rocket'</span><span class="p">]</span>  <span class="c1"># Get rocket ID</span>
-    <span class="n">rocket_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">"https://api.spacexdata.com/v4/rockets/</span><span class="si">{</span><span class="n">rocket_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">rocket_response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-        <span class="n">rocket_name</span> <span class="o">=</span> <span class="n">rocket_response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">'name'</span><span class="p">]</span>  <span class="c1"># Get rocket name</span>
-        <span class="n">rocket_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rocket_name</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">rocket_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Unknown Rocket"</span><span class="p">)</span>
+<span class="c1"># Use a  Dataframe for plotting</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>How does the weather affect tip amounts? Are tips higher in colder weather? What about when it rains?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s1">''' select snow_fall</span>
+<span class="s1">          , avg(tip_amount/passenger_count) as avg_tip</span>
+<span class="s1">          from taxi join weather on taxi.tpep_pickup_datetime = weather.date</span>
+<span class="s1">          group by 1'''</span>
 
-<span class="c1"># Step 3: Visualize the data</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">launch_dates</span><span class="p">,</span> <span class="n">rocket_names</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 
-<span class="c1"># Formatting the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Timeline of SpaceX Launches"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Launch Date"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Rocket Name"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'x'</span><span class="p">)</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Linear Regression</p>
+<p>Linear regression is a statistical method used to model the relationship between a dependent variable and one or more independent variables by fitting a linear equation to observed data</p>
+<p>This SQL query implements a linear regression model to predict the fare amount (fare_amount) based on the trip distance (trip_distance) using a formula for ordinary least squares (OLS) regression.</p>
+<p>beta = (Σ(xᵢ * yᵢ) - (Σxᵢ * Σyᵢ) / N) / (Σ(xᵢ²) - (Σxᵢ)² / N)</p>
+<p>The query computes the slope of the regression line (beta) using the formula for the slope in simple linear regression :</p>
+<p><code>fare_amount = alpha + beta * trip_distance</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">linear_regression_sql</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">  SELECT</span>
+<span class="s2">      (SUM(trip_distance * fare_amount) - SUM(trip_distance) * SUM(fare_amount) / COUNT(*)) /</span>
+<span class="s2">      (SUM(trip_distance * trip_distance) - SUM(trip_distance) * SUM(trip_distance) / COUNT(*)) AS beta,</span>
+<span class="s2">      AVG(fare_amount) AS avg_fare_amount,</span>
+<span class="s2">      AVG(trip_distance) AS avg_trip_distance</span>
+<span class="s2">  FROM</span>
+<span class="s2">      'yellow_tripdata_2016-01.parquet',</span>
+<span class="s2">      (</span>
+<span class="s2">          SELECT</span>
+<span class="s2">              AVG(fare_amount) + 3 * STDDEV_SAMP(fare_amount) as max_fare,</span>
+<span class="s2">              AVG(trip_distance) + 3 * STDDEV_SAMP(trip_distance) as max_distance</span>
+<span class="s2">          FROM 'yellow_tripdata_2016-01.parquet'</span>
+<span class="s2">      ) AS sub</span>
+<span class="s2">  WHERE</span>
+<span class="s2">      fare_amount &gt; 0 AND</span>
+<span class="s2">      fare_amount &lt; sub.max_fare AND</span>
+<span class="s2">      trip_distance &gt; 0 AND</span>
+<span class="s2">      trip_distance &lt; sub.max_distance</span>
+<span class="s2">  """</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">linear_regression_sql</span><span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="err">!</span><span class="n">wget</span> <span class="s2">"https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2016-02.parquet"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="n">beta</span><span class="p">,</span> <span class="n">avg_fare_amount</span><span class="p">,</span> <span class="n">avg_trip_distance</span> <span class="o">=</span> <span class="n">res</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">avg_fare_amount</span> <span class="o">-</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">avg_trip_distance</span>
 
-<span class="c1"># Show the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">duck_sample</span> <span class="o">=</span> <span class="s2">"SELECT trip_distance,fare_amount FROM 'yellow_tripdata_2016-02.parquet' ORDER BY RANDOM() LIMIT 1000;"</span>
+
+<span class="c1"># Get a pandas dataframe from duckdb</span>
+<span class="n">duck_df_sample</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">duck_sample</span><span class="p">)</span><span class="o">.</span><span class="n">fetchdf</span><span class="p">()</span>
+
+<span class="n">duck_df_sample</span><span class="p">[</span><span class="s2">"price"</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">duck_df_sample</span><span class="p">[</span><span class="s2">"trip_distance"</span><span class="p">]</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">duck_df_sample</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"trip_distance"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"fare_amount"</span><span class="p">)</span>
+<span class="n">duck_df_sample</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"trip_distance"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"price"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8272,4 +8304,7 @@ For a deeper dive into the various status codes, you can check out this comprehe
 </div>
 </main>
 </body>
+<script type="application/vnd.jupyter.widget-state+json">
+{"90088fdbdb8b4eecab3a5d3c25c1f733": {"model_module": "@jupyter-widgets\/controls", "model_name": "FloatProgressModel", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_108a738eb7a1469ca1cfb4ca085380d7", "max": 100, "min": 0, "orientation": "horizontal", "style": "IPY_MODEL_ef561fab49944668a83de58592293c18", "value": 100}}, "108a738eb7a1469ca1cfb4ca085380d7": {"model_module": "@jupyter-widgets\/base", "model_name": "LayoutModel", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "ef561fab49944668a83de58592293c18": {"model_module": "@jupyter-widgets\/controls", "model_name": "ProgressStyleModel", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": "black", "description_width": ""}}, "d2996ccc7d26488a92b03b5be9314ae0": {"model_module": "@jupyter-widgets\/controls", "model_name": "FloatProgressModel", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_1ce91654791843f5ae37486e65339501", "max": 100, "min": 0, "orientation": "horizontal", "style": "IPY_MODEL_965b5f4f64bf4a508fba3a309fcdf2c4", "value": 100}}, "1ce91654791843f5ae37486e65339501": {"model_module": "@jupyter-widgets\/base", "model_name": "LayoutModel", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "965b5f4f64bf4a508fba3a309fcdf2c4": {"model_module": "@jupyter-widgets\/controls", "model_name": "ProgressStyleModel", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": "black", "description_width": ""}}, "6b3e6a531d4f45a8b98c5ec59a3d456f": {"model_module": "@jupyter-widgets\/controls", "model_name": "FloatProgressModel", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_28891bda216341efb97816342c59efc8", "max": 100, "min": 0, "orientation": "horizontal", "style": "IPY_MODEL_554e6af023974faeb639c2a1ddd6b624", "value": 100}}, "28891bda216341efb97816342c59efc8": {"model_module": "@jupyter-widgets\/base", "model_name": "LayoutModel", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "554e6af023974faeb639c2a1ddd6b624": {"model_module": "@jupyter-widgets\/controls", "model_name": "ProgressStyleModel", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": "black", "description_width": ""}}, "be6dc25f9b4b4da99ed5f74a3344a29b": {"model_module": "@jupyter-widgets\/controls", "model_name": "FloatProgressModel", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets\/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets\/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_e18584dcf8b34a2dae7fdab7cc5edf2c", "max": 100, "min": 0, "orientation": "horizontal", "style": "IPY_MODEL_e24b0e7cedcd43799ec87d0b30d26ea3", "value": 100}}, "e18584dcf8b34a2dae7fdab7cc5edf2c": {"model_module": "@jupyter-widgets\/base", "model_name": "LayoutModel", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets\/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "e24b0e7cedcd43799ec87d0b30d26ea3": {"model_module": "@jupyter-widgets\/controls", "model_name": "ProgressStyleModel", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets\/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets\/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": "black", "description_width": ""}}}
+</script>
 </html>
